@@ -53,9 +53,6 @@ drop function inline_0 ();
 
 
 begin;
-	-- temporarily drop this trigger to avoid a data-change violation
-	-- on acs_privilege_hierarchy_index while updating the child privileges.
-	drop trigger acs_priv_hier_ins_del_tr on acs_privilege_hierarchy;
 
 	select acs_privilege__add_child('survsimp_admin_survey','survsimp_create_survey');
 	select acs_privilege__add_child('survsimp_admin_survey','survsimp_modify_survey');
@@ -66,12 +63,6 @@ begin;
 
 	select acs_privilege__add_child('read','survsimp_take_survey');
 
-	-- re-enable the trigger before the last insert to force the
-	-- acs_privilege_hierarchy_index table to be updated.
-
-	create trigger acs_priv_hier_ins_del_tr after insert or delete
-	on acs_privilege_hierarchy for each row
-	execute procedure acs_priv_hier_ins_del_tr ();
 
 	select acs_privilege__add_child('admin','survsimp_admin_survey');
 
