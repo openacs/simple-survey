@@ -5,7 +5,7 @@
     <package-name>Simple Survey</package-name>
     <pretty-plural>Simple Surveys</pretty-plural>
     <initial-install-p>f</initial-install-p>
-    <singleton-p>t</singleton-p>
+    <singleton-p>f</singleton-p>
 
     <version name="0.1d" url="http://software.arsdigita.com/packages/simple-survey-0.1d.apm">
     <database-support>
