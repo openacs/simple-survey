@@ -79,7 +79,7 @@ where survey_id = :survey_id
 order by sort_key" {
 
 
-    set question_options [list "<a href=\"question-modify-text?[export_url_vars question_id survey_id]\">modify text</a>" "<a href=\"question-delete?question_id=$question_id\">delete</a>" "<a href=\"question-add?[export_url_vars survey_id]&after=$sort_key\">insert after</a>"]
+    set question_options [list "<a href=\"question-modify-text?[export_url_vars question_id survey_id]\">modify text</a>" "<a href=\"question-delete?question_id=$question_id\">delete</a>" "<a href=\"question-add?[export_url_vars survey_id]&after=$sort_key\">add new question</a>"]
 
     if { $count > 0 } {
 	lappend question_options "<a href=\"question-swap?[export_url_vars survey_id sort_key]\">swap with prev</a>"
