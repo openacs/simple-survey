@@ -30,7 +30,6 @@ ad_page_contract {
 
 set package_id [ad_conn package_id]
 set user_id [ad_get_user_id]
-
 ad_require_permission $package_id survsimp_create_question
 
 set question_id [db_nextval acs_object_id_seq]
@@ -108,7 +107,6 @@ if { $type == "scored" } {
 <option value=medium>Medium</option>
 <option value=large>Large</option>
 </select>"
-
 	}
 	"textarea" {
 	    set presentation_options "Rows: <input name=textarea_rows size=3>  Columns: <input name=textarea_cols size=3>"

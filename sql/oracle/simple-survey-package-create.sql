@@ -101,11 +101,7 @@ as
         creation_user in acs_objects.creation_user%TYPE default null,
         creation_ip in acs_objects.creation_ip%TYPE default null,
         context_id in acs_objects.context_id%TYPE default null
-    ) return survsimp_questions.question_id%TYPE;
-
-    function copy (
-        question_id in survsimp_questions.question_id%TYPE
-    ) return survsimp_questions.question_id%TYPE;
+    ) return acs_objects.object_id%TYPE;
 
     procedure delete (
         question_id in survsimp_questions.question_id%TYPE
@@ -132,7 +128,7 @@ as
         creation_user in acs_objects.creation_user%TYPE default null,
         creation_ip in acs_objects.creation_ip%TYPE default null,
         context_id in acs_objects.context_id%TYPE default null
-    ) return survsimp_questions.question_id%TYPE
+    ) return acs_objects.object_id%TYPE
     is
         v_question_id survsimp_questions.question_id%TYPE;
     begin
@@ -155,106 +151,13 @@ as
         return v_question_id;
     end new;
 
-    function copy (
-        question_id in survsimp_questions.question_id%TYPE
-    ) return survsimp_questions.question_id%TYPE
-    is
-        v_question_id survsimp_questions.question_id%TYPE;
-        v_object_type acs_objects.object_type%TYPE;
-        v_creation_user acs_objects.creation_user%TYPE;
-        v_creation_ip acs_objects.creation_ip%TYPE;
-        v_context_id acs_objects.context_id%TYPE;
-        v_sort_key survsimp_questions.sort_key%TYPE;
-    begin
-        begin
-            select acs_objects.object_type,
-                   acs_objects.creation_user,
-                   acs_objects.creation_ip,
-                   acs_objects.context_id
-            into v_object_type,
-                 v_creation_user,
-                 v_creation_ip,
-                 v_context_id
-            from acs_objects
-            where acs_objects.object_id = survsimp_question.copy.question_id;
-
-            exception when NO_DATA_FOUND then
-                return -1;
-        end;
-
-        v_question_id := acs_object.new(
-            object_id => null,
-            object_type => v_object_type,
-            creation_date => sysdate,
-            creation_user => v_creation_user,
-            creation_ip => v_creation_ip,
-            context_id => v_context_id
-        );
-
-        begin
-            select max(sort_key) + 1
-            into v_sort_key
-            from survsimp_questions
-            where survsimp_questions.survey_id = (select sq2.survey_id
-                                                  from survsimp_questions sq2
-                                                  where sq2.question_id = survsimp_question.copy.question_id);
-
-            exception when NO_DATA_FOUND then
-                v_sort_key := 999;
-        end;
-
-        insert
-        into survsimp_questions
-        (question_id,
-         survey_id,
-         sort_key,
-         question_text,
-         abstract_data_type,
-         required_p,
-         active_p,
-         presentation_type,
-         presentation_options,
-         presentation_alignment)
-        select v_question_id,
-               survsimp_questions.survey_id,
-               v_sort_key,
-               survsimp_questions.question_text,
-               survsimp_questions.abstract_data_type,
-               survsimp_questions.required_p,
-               survsimp_questions.active_p,
-               survsimp_questions.presentation_type,
-               survsimp_questions.presentation_options,
-               survsimp_questions.presentation_alignment
-        from survsimp_questions
-        where survsimp_questions.question_id = survsimp_question.copy.question_id;
-
-        insert
-        into survsimp_question_choices
-        (choice_id,
-         question_id,
-         label,
-         numeric_value,
-         sort_order)
-        select survsimp_choice_id_sequence.nextval,
-               v_question_id,
-               survsimp_question_choices.label,
-               survsimp_question_choices.numeric_value,
-               survsimp_question_choices.sort_order
-        from survsimp_question_choices
-        where survsimp_question_choices.question_id = survsimp_question.copy.question_id;
-
-        return v_question_id;
-    end copy;
-
     procedure delete (
         question_id in survsimp_questions.question_id%TYPE
     )
     is
     begin
-        delete
-        from survsimp_questions
-        where question_id = survsimp_question.delete.question_id;
-
+        delete from survsimp_questions
+            where question_id = survsimp_question.delete.question_id;
         acs_object.delete(question_id);
     end delete;
 end survsimp_question;
