@@ -22,10 +22,10 @@
 
         <files>
             <file type="package_spec" path="simple-survey.info"/>
-            <file type="data_model" db_type="oracle" path="sql/oracle/survsimp-create.sql"/>
-            <file type="data_model" db_type="oracle" path="sql/oracle/survsimp-drop.sql"/>
-            <file type="data_model" db_type="postgresql" path="sql/postgresql/survsimp-create.sql"/>
-            <file type="data_model" db_type="postgresql" path="sql/postgresql/survsimp-drop.sql"/>
+            <file type="data_model_create" db_type="oracle" path="sql/oracle/simple-survey-create.sql"/>
+            <file type="data_model_drop" db_type="oracle" path="sql/oracle/simple-survey-drop.sql"/>
+            <file type="data_model_create" db_type="postgresql" path="sql/postgresql/simple-survey-create.sql"/>
+            <file type="data_model_drop" db_type="postgresql" path="sql/postgresql/simple-survey-drop.sql"/>
             <file type="query_file" db_type="oracle" path="tcl/survsimp-procs-oracle.xql"/>
             <file type="query_file" db_type="postgresql" path="tcl/survsimp-procs-postgresql.xql"/>
             <file type="tcl_procs" path="tcl/survsimp-procs.tcl"/>
@@ -97,6 +97,8 @@
             <file type="content_page" path="www/admin/survey-create.tcl"/>
             <file type="content_page" path="www/admin/survey-toggle.tcl"/>
             <file type="query_file" path="www/admin/survey-toggle.xql"/>
+            <file type="query_file" db_type="oracle" path="www/admin/view-text-responses-oracle.xql"/>
+            <file type="query_file" db_type="postgresql" path="www/admin/view-text-responses-postgresql.xql"/>
             <file type="content_page" path="www/admin/view-text-responses.tcl"/>
             <file type="query_file" path="www/admin/view-text-responses.xql"/>
             <file type="documentation" path="www/doc/index.html"/>
