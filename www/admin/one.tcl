@@ -158,6 +158,6 @@ proc survey_specific_html { type } {
 }
 
 
-set context_bar [ad_context_bar_ws_or_index [list "./" "Simple Survey Admin"] "Administer Survey"]
+set context_bar [list [list "./" "Simple Survey Admin"] "Administer Survey"]
 
 ad_return_template

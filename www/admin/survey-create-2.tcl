@@ -65,52 +65,24 @@ if {$exception_count > 0} {
 
 if {$checked_p == "f"} {
     set survey_id [db_nextval acs_object_id_seq]
-    set whole_page "[ad_header "Confirm New Survey Description"]
+    set context_bar [list [list "index.tcl" "Simple Survey Admin"] "Confirm New Survey Description"]
     
-    <h2>Confirm New Survey Description</h2>
-    
-    [ad_context_bar_ws_or_index [list "index.tcl" "Simple Survey Admin"] "Confirm New Survey Description"]
-    
-    <hr>
-    
-    Here is how your survey description will appear:
-    <blockquote><p>"
-
     switch $desc_html {
 	"html" {
-	    append whole_page "$description"
+	    # nothing, the description is the description
 	}
 	
 	"pre" {
 	    regsub "\[ \012\015\]+\$" $description {} description
 	    set description "<pre>[ns_quotehtml $description]</pre>"
-	    append whole_page "$description"
 	}
 
 	default {
-	    append whole_page "[util_convert_plaintext_to_html $description]"
+	    set description "[util_convert_plaintext_to_html $description]"
 	}
     }
     
-    append whole_page "<form method=post action=\"[ns_conn url]\">
-    [export_form_vars survey_id name description desc_html type variable_names logic]
-    <input type=hidden name=checked_p value=\"t\">
-    <br><center><input type=submit value=\"Confirm\"></center>
-    </form>
-
-    </blockquote>
-
-    <font size=-1 face=\"verdana, arial, helvetica\">
-    Note: if the text above has a bunch of visible HTML tags then you probably
-    should have selected \"HTML\" rather than \"Plain Text\". If it is all smashed together
-    and you want the original line breaks saved then choose \"Preformatted Text\".
-    Use your browser's Back button to return to the submission form.
-    </font>
-    
-    [ad_footer]"
-    
-    
-    doc_return 200 text/html $whole_page
+    ad_return_template survey-create-confirm
     return
 } else {
     

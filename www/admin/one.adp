@@ -3,7 +3,7 @@
 <property name=context_bar>@context_bar@</property>
 
 <ul>
-<li>Created by: <a href="/shared/community-member?user_id=@creation_user@">@creator_name@</a>
+<li>Created by: <a href="<%= [acs_community_member_url -user_id $creation_user] %>">@creator_name@</a>
 <li>Name: @survey_name@ <font size=-1>[ <a href="name-edit?survey_id=@survey_id@">edit</a> ]</font>
 <li>Created: <%= [util_AnsiDatetoPrettyDate $creation_date] %>
 <li>Status: @survey_status@ <font size=-1>@toggle_enabled_link@</font>

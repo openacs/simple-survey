@@ -159,7 +159,7 @@ if { $n_responses == 1 } {
     }
 }
 
-set context_bar [ad_context_bar_ws_or_index [list "./" "Simple Survey Admin"] \
+set context_bar [list [list "./" "Simple Survey Admin"] \
      [list "one?survey_id=$survey_id" "Administer Survey"] \
      "Responses"]
 

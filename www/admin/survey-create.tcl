@@ -72,45 +72,7 @@ are available in a hash, ad_page_contract, keyed on the survey variable names.
     return $return_html
 }
 
-set whole_page "[ad_header "Create New Survey"]
+set context_bar [list [list "./" "Survey Admin"] "Create Survey"]
 
-<h2>Create a New Survey</h2>
-
-[ad_context_bar_ws_or_index [list "./" "Simple Survey Admin"] "Create Survey"]
-
-<hr>
-
-<blockquote>
-
-<form method=post action=\"survey-create-2\">
-[ad_export_vars -form type]
-<p>
-
-Survey Name:  <input type=text name=name value=\"$name\" size=30>
-<p>
-Survey Description: 
-<br>
-<textarea name=description rows=10 cols=65>$description</textarea>
-<br>
-The description above is: 
-<input type=radio name=desc_html value=\"pre\">Preformatted text
-<input type=radio name=desc_html value=\"plain\" checked>Plain text
-<input type=radio name=desc_html value=\"html\">HTML
-<p>
-[survey_specific_html $type]
-<p>
-Display Type: [survsimp_display_type_select -name display_type -value list]
-<center>
-<input type=submit value=\"Create\">
-</center>
-</form>
-
-</blockquote>
-
-[ad_footer]
-"
-
-
-
-doc_return 200 text/html $whole_page 
+ad_return_template
 

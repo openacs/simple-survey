@@ -11,7 +11,7 @@ ad_page_contract {
 
 }
 
-set context_bar [ad_context_bar_ws_or_index "Simple Survey Admin"]
+set context_bar [list "Survey Admin"]
 
 set package_id [ad_conn package_id]
 

@@ -36,7 +36,7 @@ set survey_name [db_string survsimp_name_from_id "select name as survey_name
 from survsimp_surveys
 where survey_id = :survey_id" ]
 
-set context_bar [ad_context_bar_ws_or_index [list "./" "Simple Survey Admin"] \
+set context_bar [list [list "./" "Simple Survey Admin"] \
      [list "one?survey_id=$survey_id" "Administer Survey"] \
      "Respondents"]
 
