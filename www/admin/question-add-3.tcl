@@ -98,7 +98,7 @@ if { $type == "scored" } {
 	    set sort_key 1
 	}
 	
-	db_exec_plsql reate_question {
+	db_exec_plsql create_question {
 	    begin
 		:1 := survsimp_question.new (
 		    question_id => :question_id,

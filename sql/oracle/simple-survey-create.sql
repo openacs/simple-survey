@@ -128,7 +128,11 @@ create table survsimp_surveys (
 	single_editable_p	char(1)
 				constraint survsimp_surv_single_edit_p_ck
 				check(single_editable_p in ('t','f')),
-	type                    varchar(20)
+	type                    varchar(20),
+        package_id              integer
+                                constraint survsimp_package_id_nn not null
+                                constraint survsimp_package_id_fk references
+                                apm_packages (package_id) on delete cascade
 );
 
 -- each question can be 
@@ -324,6 +328,7 @@ as
 		single_editable_p	in survsimp_surveys.single_editable_p%TYPE	default 't',
 		enabled_p	in survsimp_surveys.enabled_p%TYPE			default 'f',
 		type		in survsimp_surveys.type%TYPE				default 'general',
+                package_id      in survsimp_surveys.package_id%TYPE,
 		object_type	in acs_objects.object_type%TYPE				default 'survsimp_survey',
 		creation_date	in acs_objects.creation_date%TYPE			default sysdate,
 		creation_user	in acs_objects.creation_user%TYPE			default null,
@@ -350,6 +355,7 @@ as
 		single_editable_p	in survsimp_surveys.single_editable_p%TYPE	default 't',
 		enabled_p	in survsimp_surveys.enabled_p%TYPE			default 'f',
 		type		in survsimp_surveys.type%TYPE				default 'general',
+                package_id      in survsimp_surveys.package_id%TYPE,
 		object_type	in acs_objects.object_type%TYPE				default 'survsimp_survey',
 		creation_date	in acs_objects.creation_date%TYPE			default sysdate,
 		creation_user	in acs_objects.creation_user%TYPE			default null,
@@ -369,10 +375,10 @@ as
 		);   
 		insert into survsimp_surveys
 			(survey_id, name, short_name, description, description_html_p,
-			single_response_p, single_editable_p, enabled_p, type)
+			single_response_p, single_editable_p, enabled_p, type, package_id)
 			values
 			(v_survey_id, new.name, new.short_name, new.description, new.description_html_p,
-			new.single_response_p, new.single_editable_p, new.enabled_p, new.type);
+			new.single_response_p, new.single_editable_p, new.enabled_p, new.type, new.package_id);
 
 		return v_survey_id;
 	end new;

@@ -149,6 +149,7 @@ if {$checked_p == "f"} {
                     description => :description,
                     description_html_p => :description_html_p,
                     type => :type,
+                    package_id => :package_id,
                     context_id => :package_id,
 		    creation_user => :user_id
                 );
