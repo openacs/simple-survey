@@ -180,7 +180,12 @@ create table survsimp_surveys (
 				-- constraint survsimp_surv_single_edit_p_ck
 				-- check(single_editable_p in ('t','f')),
 	type                    varchar(20),               
-        display_type            varchar(20)
+        display_type            varchar(20),
+        package_id              integer
+                                constraint survsimp_package_id_nn not null
+                                constraint survsimp_package_id_fk references
+                                apm_packages (package_id) on delete cascade
+
 );
 
 -- each question can be 
@@ -451,11 +456,11 @@ begin
     insert into survsimp_surveys
     (survey_id, name, short_name, description, 
     description_html_p, single_response_p, single_editable_p, 
-    enabled_p, type, display_type)
+    enabled_p, type, display_type, package_id)
     values
     (v_survey_id, new__name, new__short_name, new__description, 
     new__description_html_p, new__single_response_p, new__single_editable_p, 
-    new__enabled_p, new__type, new__display_type);
+    new__enabled_p, new__type, new__display_type, new__context_id);
 
     return v_survey_id;
 
