@@ -16,7 +16,7 @@ ad_page_contract {
 ad_require_permission $survey_id survsimp_admin_survey
 
 db_dml survsimp_reponse_toggle "update survsimp_surveys 
-set single_response_p = logical_negation(single_response_p)
+set single_response_p = util.logical_negation(single_response_p)
 where survey_id = :survey_id"
 
 db_release_unused_handles

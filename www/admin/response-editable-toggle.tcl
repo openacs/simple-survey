@@ -16,7 +16,7 @@ ad_page_contract {
 
 ad_require_permission $survey_id survsimp_admin_survey
 
-db_dml survsimp_response_editable_toggle "update survsimp_surveys set single_editable_p = logical_negation(single_editable_p)
+db_dml survsimp_response_editable_toggle "update survsimp_surveys set single_editable_p = util.logical_negation(single_editable_p)
 where survey_id = :survey_id"
 
 db_release_unused_handles

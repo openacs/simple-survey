@@ -21,7 +21,7 @@ ad_page_contract {
 
 ad_require_permission $survey_id survsimp_modify_question
    
-db_dml survsimp_question_required_toggle "update survsimp_questions set required_p = logical_negation(required_p)
+db_dml survsimp_question_required_toggle "update survsimp_questions set required_p = util.logical_negation(required_p)
 where survey_id = :survey_id
 and question_id = :question_id"
 
