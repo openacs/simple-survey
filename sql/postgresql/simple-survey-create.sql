@@ -317,7 +317,7 @@ create table survsimp_question_responses (
 	clob_answer		text,
 	number_answer		numeric,
 	varchar_answer		text,
-	date_answer		timestamp,
+	date_answer		timestamptz,
 	-- columns useful for attachments, column names
 	-- lifted from file-storage.sql and bboard.sql
 	-- this is where the actual content is stored
