@@ -5,7 +5,7 @@
 
 <fullquery name="response_ids_select">      
       <querytext>
-    select response_id, creation_date, to_char(creation_date, 'DD MONTH YYYY') as pretty_submission_date
+    select response_id, creation_date, to_char(creation_date, 'YYYY-MM-DD HH24:MI:SS') as submission_date_ansi
     from survsimp_responses, acs_objects
     where survey_id = :survey_id
     and response_id = object_id
