@@ -40,10 +40,10 @@ set whole_page "[ad_header "Response from $first_names $last_name"]
 
 <h2>Response from $first_names $last_name</h2>
 
-[ad_context_bar_ws_or_index [list "" "Simple Survey Admin"] \
+[ad_context_bar [list "" "Simple Survey Admin"] \
      [list "one?survey_id=$survey_id" "Administer Survey"] \
      [list "respondents?survey_id=$survey_id" "Respondents"] \
-     "One Respondent"]
+                     "One Respondent"]
 
 <hr>
 

@@ -24,6 +24,4 @@ set question_text [db_string survsimp_question_text_from_id "select question_tex
 from survsimp_questions
 where question_id = :question_id" ]
 
-set context_bar [ad_context_bar_ws_or_index [list "./" "Simple Survey Admin"] [list "one.tcl?[export_url_vars survey_id]" "Administer Survey"] "Modify a Question's Text"]
-
-ad_return_template
+set context [list [list "one.tcl?[export_url_vars survey_id]" "Administer Survey"] "Modify a Question's Text"]

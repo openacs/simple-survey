@@ -1,6 +1,6 @@
 <master src=./master>
 <property name=title>@survey_name@: Edit Name</property>
-<property name=context_bar>@context_bar@</property>
+<property name="context">@context@</property>
 
 <blockquote>
 Edit and submit to change the name for this survey:

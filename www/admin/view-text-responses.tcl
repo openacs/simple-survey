@@ -66,10 +66,10 @@ where
 doc_return 200 text/html "[ad_header "Responses to Question"]
 <h2>$question_text</h2>
 
-[ad_context_bar_ws_or_index [list "" "Simple Survey Admin"] \
-     [list "one?survey_id=$survey_id" "Administer Survey"] \
+[ad_context_bar [list "one?survey_id=$survey_id" "Administer Survey"] \
      [list "responses?survey_id=$survey_id" "Responses to Survey"] \
-     "Responses to Question"]
+                     "Responses to Question"]
+
 
 <hr>
 

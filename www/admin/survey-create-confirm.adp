@@ -1,6 +1,6 @@
-<master src=./master>
+<master src="master">
 <property name=title>Survey Administration: Confirm New Survey</property>
-<property name=context_bar>@context_bar@</property>
+<property name="context">@context@</property>
 
 <p>
 Here is how your survey description will appear:
@@ -16,10 +16,10 @@ Here is how your survey description will appear:
 
     </blockquote>
 
-    <font size=-1 face="verdana, arial, helvetica">
+    <small>
     Note: if the text above has a bunch of visible HTML tags then you probably
     should have selected "HTML" rather than "Plain Text". If it is all smashed together
     and you want the original line breaks saved then choose "Preformatted Text".
     Use your browser's Back button to return to the submission form.
-    </font>
+    </small>
     

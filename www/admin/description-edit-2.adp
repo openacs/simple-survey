@@ -1,6 +1,6 @@
 <master src=./master>
 <property name=title>Edit Description Confirmation</property>
-<property name=context_bar>@context_bar@</property>
+<property name="context">@context@</property>
 
 Here is how your survey description will appear:
 <blockquote><p>

@@ -1,10 +1,7 @@
-  <html>
-    <head>
-      <title>@survey_name@</title>
-    </head>
-    
-    <h2>@survey_name@</h2>
-    
+<master src="master">
+<property name=title>One Survey: @name@</property>
+<property name="context">one survey</property>
+
     @description@
     <p>
       <multiple name=responses>	
@@ -26,4 +23,3 @@
             </tr>
           </table>
         </multiple>
-  </html>

@@ -20,7 +20,7 @@ set whole_page "[ad_header "Choose Survey Type"]
 
 <h2>Choose a Survey Type</h2>
 
-[ad_context_bar_ws_or_index [list "" "Simple Survey Admin"] "Choose Type"]
+[ad_context_bar "Choose Type"]
 
 <hr>
 

@@ -81,10 +81,9 @@ doc_return 200 text/html "[ad_header "People who answered \"$response_text\""]
 
 <h2>Responder List</h2>
 
-[ad_context_bar_ws_or_index [list "" "Simple Survey Admin"] \
-     [list "one?survey_id=$survey_id" "Administer Survey"] \
-     [list "responses?survey_id=$survey_id" "Responses"] \
-     "One Response"]
+[ad_context_bar [list "one?survey_id=$survey_id" "Administer Survey"] \
+                     [list "responses?survey_id=$survey_id" "Responses"] \
+                     "One Response"]
 
 <hr>
 

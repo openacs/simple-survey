@@ -159,8 +159,6 @@ if { $n_responses == 1 } {
     }
 }
 
-set context_bar [list [list "./" "Simple Survey Admin"] \
-     [list "one?survey_id=$survey_id" "Administer Survey"] \
+set context [list [list "one?survey_id=$survey_id" "Administer Survey"] \
      "Responses"]
 
-ad_return_template

@@ -179,6 +179,6 @@ set form_var_list [export_form_vars survey_id question_id question_text presenta
 
 }
 
-set context_bar [list [list "./" "Simple Survey Admin"] [list "one?[export_url_vars survey_id]" "Administer Survey"] "Add A Question"]
+set context [list [list "one?[export_url_vars survey_id]" "Administer Survey"] "Add A Question"]
 
 ad_return_template

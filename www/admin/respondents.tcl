@@ -23,7 +23,7 @@ db_multirow respondents select_respondents {} {
 
 set survey_name [db_string select_survey_name {}]
 
-set context_bar [list \
+set context [list \
     [list "one?survey_id=$survey_id" "Administer Survey"] \
     "Respondents" \
 ]

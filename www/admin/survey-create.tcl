@@ -72,7 +72,7 @@ are available in a hash, ad_page_contract, keyed on the survey variable names.
     return $return_html
 }
 
-set context_bar [list [list "./" "Survey Admin"] "Create Survey"]
+set context [list "Create Survey"]
 
 ad_return_template
 

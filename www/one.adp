@@ -1,6 +1,6 @@
-<master src=./master>
+<master src="master">
 <property name=title>One Survey: @name@</property>
-<property name=context_bar>@context_bar@</property>
+<property name="context">@context@</property>
 
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <form enctype=multipart/form-data method="post" action="process-response">

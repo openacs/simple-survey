@@ -11,7 +11,7 @@ ad_page_contract {
 
 }
 
-set context_bar [list "Survey Admin"]
+set context [list "Survey Admin"]
 
 set package_id [ad_conn package_id]
 
@@ -24,5 +24,3 @@ db_multirow surveys select_surveys "select survey_id, name, enabled_p
 from survsimp_surveys
 where package_id= :package_id
 order by enabled_p desc, upper(name)"
-
-ad_return_template

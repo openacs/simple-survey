@@ -1,6 +1,6 @@
 <master src=./master>
 <property name=title>@survey_name@: Edit Description</property>
-<property name=context_bar>@context_bar@</property>
+<property name="context">@context@</property>
 
 <blockquote>
 Edit and submit to change the description for this survey:

@@ -1,6 +1,6 @@
 <master src=./master>
 <property name=title>Survey Administration: Create New Survey</property>
-<property name=context_bar>@context_bar@</property>
+<property name="context">@context@</property>
 
 <blockquote>
 
@@ -8,7 +8,7 @@
 <%= [ad_export_vars -form type] %>
 <p>
 
-Survey Name:  <input type=text name=name value="@name@" size=30>
+Survey Name:  <input type=text name=name value="@name@" size=21 maxlength=20>
 <p>
 Survey Description: 
 <br>

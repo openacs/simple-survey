@@ -35,7 +35,7 @@ if {$exception_count > 0} {
 }
 
 if {$checked_p == "f"} {
-    set context_bar [ad_context_bar_ws_or_index [list "index.tcl" "Simple Survey Admin"] [list "one.tcl?[export_url_vars survey_id]" "Administer Survey"] "Confirm Description"]
+    set context [list [list "one.tcl?[export_url_vars survey_id]" "Administer Survey"] "Confirm Description"]
 
     switch $desc_html {
 	"t" {

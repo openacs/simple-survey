@@ -65,7 +65,7 @@ if {$exception_count > 0} {
 
 if {$checked_p == "f"} {
     set survey_id [db_nextval acs_object_id_seq]
-    set context_bar [list [list "index.tcl" "Simple Survey Admin"] "Confirm New Survey Description"]
+    set context [list "Confirm New Survey Description"]
     
     switch $desc_html {
 	"html" {

@@ -23,7 +23,4 @@ where survey_id = :survey_id"
 set html_p_set [ns_set create]
 ns_set put $html_p_set desc_html $desc_html
 
-set context_bar [list [list "./" "Simple Survey Admin"] [list "one?[export_url_vars survey_id]" "Administer Survey"] "Edit Description"]
-
-
-ad_return_template
+set context [list [list "one?[export_url_vars survey_id]" "Administer Survey"] "Edit Description"]

@@ -1,6 +1,6 @@
 <master src=./master>
 <property name=title>@survey_name@: Modify Question Text</property>
-<property name=context_bar>@context_bar@</property>
+<property name="context">@context@</property>
 
 <form action="question-modify-text-2" method=GET>
 <%= [export_form_vars question_id survey_id] %>

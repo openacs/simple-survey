@@ -329,10 +329,9 @@ switch $type {
 
 	if {[info exists return_url] && ![empty_string_p $return_url]} {
 	    ad_returnredirect "$return_url"
-	    return
+            ad_script_abort
 	} else {
-            set context_bar [ad_context_bar_ws_or_index [list "./" "Surveys"] "Response Submitted for $survey_name"]
-	    ad_return_template
+            set context [list "Response Submitted"]
 	}
     }
 
@@ -353,25 +352,22 @@ switch $type {
 
 
 	if {[info exists return_url] && ![empty_string_p $return_url]} {
-
             db_release_unused_handles
 	    ad_returnredirect $return_url
-
         }
 
         eval $logic
 
         db_release_unused_handles
+        ad_script_abort
     }
 
     default {
 	if {[info exists return_url] && ![empty_string_p $return_url]} {
 	    ad_returnredirect "$return_url"
-	    return
+            ad_script_abort
 	} else {
-            set context_bar [ad_context_bar_ws_or_index [list "./" "Surveys"] "Response Submitted for $survey_name"]
-
-	    ad_return_template
+            set context {"Response Submitted"}
 	}	
     }
 }
