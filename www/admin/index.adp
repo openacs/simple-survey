@@ -1,6 +1,6 @@
 <master>
 <property name=title>Survey Administration</property>
-<property name="context">@context@</property>
+<property name="context">@context;noquote@</property>
 
 <ul>
 <multiple name=surveys>

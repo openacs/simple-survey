@@ -1,6 +1,6 @@
 <master>
-<property name=title>One Survey: @survey_name@</property>
-<property name="context">@context@</property>
+<property name=title>One Survey: @survey_name;noquote@</property>
+<property name="context">@context;noquote@</property>
 
 <ul>
 <li>Created by: <a href="<%= [acs_community_member_url -user_id $creation_user] %>">@creator_name@</a>

@@ -1,6 +1,6 @@
 <master>
 <property name=title>Survey Administration: Confirm New Survey</property>
-<property name="context">@context@</property>
+<property name="context">@context;noquote@</property>
 
 <p>
 Here is how your survey description will appear:

@@ -1,6 +1,6 @@
 <master>
 <property name=title>Edit Description Confirmation</property>
-<property name="context">@context@</property>
+<property name="context">@context;noquote@</property>
 
 Here is how your survey description will appear:
 <blockquote><p>

@@ -1,6 +1,6 @@
 <master>
-<property name=title>@name@: New Question</property>
-<property name="context">@context@</property>
+<property name=title>@name;noquote@: New Question</property>
+<property name="context">@context;noquote@</property>
 
 <form action="question-add-2" method=post>
 <%= [export_form_vars survey_id after] %>

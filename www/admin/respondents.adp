@@ -1,6 +1,6 @@
 <master>
-<property name="title">@survey_name@: Respondents</property>
-<property name="context">@context@</property>
+<property name="title">@survey_name;noquote@: Respondents</property>
+<property name="context">@context;noquote@</property>
 
 <ul>
 <multiple name="respondents">

@@ -1,6 +1,6 @@
   <master>
     <property name=title>Surveys</property>
-    <property name="context">@context@</property>
+    <property name="context">@context;noquote@</property>
 
     <if @surveys:rowcount@ eq 0>
       <em>No surveys active</em>

@@ -1,5 +1,5 @@
 <master>
-<property name=title>One Survey: @name@</property>
+<property name=title>One Survey: @name;noquote@</property>
 <property name="context">one survey</property>
 
     @description@

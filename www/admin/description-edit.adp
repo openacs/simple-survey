@@ -1,6 +1,6 @@
 <master>
-<property name=title>@survey_name@: Edit Description</property>
-<property name="context">@context@</property>
+<property name=title>@survey_name;noquote@: Edit Description</property>
+<property name="context">@context;noquote@</property>
 
 <blockquote>
 Edit and submit to change the description for this survey:
