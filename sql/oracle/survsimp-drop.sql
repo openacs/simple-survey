@@ -64,6 +64,6 @@ end;
 /
 show errors
 
-
-drop function logical_negation;
+-- gilbertw - logical_negation is defined in utilities-create.sql in acs-kernel
+-- drop function logical_negation;
 

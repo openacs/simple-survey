@@ -11,22 +11,23 @@
 -- module, to be developed by buddy@ucla.edu, so we prefix
 -- all of our Oracle structures with "survsimp"
 
+-- gilbertw - logical_negation is defined in utilities-create.sql in acs-kernel
 -- this is a PL/SQL function that used to be in the standard ACS 3.x core - not in the
 -- current ACS 4.0 core however...
-create or replace function logical_negation(true_or_false IN varchar)
-return varchar
-is
-BEGIN
-  IF true_or_false is null THEN
-    return null;
-  ELSIF true_or_false = 'f' THEN
-    return 't';
-  ELSE
-    return 'f';
-  END IF;
-END logical_negation;
-/
-show errors
+-- create or replace function logical_negation(true_or_false IN varchar)
+-- return varchar
+-- is
+-- BEGIN
+--   IF true_or_false is null THEN
+--     return null;
+--   ELSIF true_or_false = 'f' THEN
+--     return 't';
+--   ELSE
+--     return 'f';
+--   END IF;
+-- END logical_negation;
+-- /
+-- show errors
 
 begin
 
