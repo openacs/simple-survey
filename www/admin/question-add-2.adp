@@ -14,7 +14,7 @@ Question:
 
 @response_type_html;noquote@
 
-@response_fields@
+@response_fields;noquote@
 
 <p>
 

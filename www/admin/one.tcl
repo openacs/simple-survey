@@ -159,5 +159,6 @@ proc survey_specific_html { type } {
 
 
 set context [list "Administer Survey"]
+set survey_specific_html [survey_specific_html $type]
 
 ad_return_template
