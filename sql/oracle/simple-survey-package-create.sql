@@ -19,7 +19,7 @@ as
         context_id in acs_objects.context_id%TYPE default null
     ) return acs_objects.object_id%TYPE;
 
-    procedure delete (
+    procedure del (
         survey_id in survsimp_surveys.survey_id%TYPE
     );
 end survsimp_survey;
@@ -67,15 +67,15 @@ as
         return v_survey_id;
     end new;
 
-    procedure delete (
+    procedure del (
         survey_id survsimp_surveys.survey_id%TYPE
     )
     is
     begin
         delete from survsimp_surveys
-            where survey_id = survsimp_survey.delete.survey_id;
-        acs_object.delete(survey_id);
-    end delete;
+            where survey_id = survsimp_survey.del.survey_id;
+        acs_object.del(survey_id);
+    end del;
 end survsimp_survey;
 /
 show errors
@@ -103,7 +103,7 @@ as
         context_id in acs_objects.context_id%TYPE default null
     ) return acs_objects.object_id%TYPE;
 
-    procedure delete (
+    procedure del (
         question_id in survsimp_questions.question_id%TYPE
     );
 end survsimp_question;
@@ -151,15 +151,15 @@ as
         return v_question_id;
     end new;
 
-    procedure delete (
+    procedure del (
         question_id in survsimp_questions.question_id%TYPE
     )
     is
     begin
         delete from survsimp_questions
-            where question_id = survsimp_question.delete.question_id;
-        acs_object.delete(question_id);
-    end delete;
+            where question_id = survsimp_question.del.question_id;
+        acs_object.del(question_id);
+    end del;
 end survsimp_question;
 /
 show errors
@@ -181,7 +181,7 @@ as
         context_id in acs_objects.context_id%TYPE default null
     ) return acs_objects.object_id%TYPE;
 
-    procedure delete (
+    procedure del (
         response_id in survsimp_responses.response_id%TYPE
     );
 end survsimp_response;
@@ -218,15 +218,15 @@ as
         return v_response_id;
     end new;
 
-    procedure delete (
+    procedure del (
         response_id in survsimp_responses.response_id%TYPE
     )
     is
     begin
         delete from survsimp_responses
-            where response_id = survsimp_response.delete.response_id;
-        acs_object.delete(response_id);
-    end delete;
+            where response_id = survsimp_response.del.response_id;
+        acs_object.del(response_id);
+    end del;
 end survsimp_response;
 /
 show errors

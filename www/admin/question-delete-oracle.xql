@@ -7,7 +7,7 @@
       <querytext>
       
 	    begin
-        	survsimp_question.delete (:question_id);
+        	survsimp_question.del (:question_id);
 	    end;
 	
       </querytext>
