@@ -83,7 +83,7 @@ if {$checked_p == "f"} {
     }
     
     ad_return_template survey-create-confirm
-    ad_script_abort
+    return
 } else {
     
     # make sure the short_name is unique
