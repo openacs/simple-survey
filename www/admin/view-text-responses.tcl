@@ -40,19 +40,18 @@ set results ""
 db_foreach all_responses_to_question "
 select
   $column_name as response,
-  u.user_id,
-  first_names || ' ' || last_name as respondent_name,
-  submission_date,
-  ip_address
+  person.name(o.creation_user) as respondent_name,
+  o.creation_date as submission_date,
+  o.creation_ip as ip_address
 from
   survsimp_responses r,
   survsimp_question_responses qr,
-  users u
+  acs_objects o
 where
   qr.response_id = r.response_id
-  and u.user_id = r.user_id
   and qr.question_id = :question_id
-order by r.submission_date" {
+  and o.object_id = qr.response_id
+  order by submission_date" {
 
     append results "<pre>$response</pre>
 <p>
