@@ -35,7 +35,7 @@ ad_page_contract {
 
 ad_require_permission $survey_id survsimp_take_survey
 
-set user_id [ad_maybe_redirect_for_registration]
+set user_id [auth::require_login]
 
 db_1row survey_info "select name, description, single_response_p, single_editable_p, display_type
     from survsimp_surveys where survey_id = :survey_id"

@@ -125,7 +125,7 @@ ad_page_contract {
 
 ad_require_permission $survey_id survsimp_take_survey
 
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 
 # Do the inserts.
 

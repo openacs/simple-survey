@@ -33,7 +33,7 @@ ad_page_contract {
 
 # If group_id is specified, we return all the responses for that group by any user
 
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 
 db_1row survey_info { select name, description
     from survsimp_surveys
