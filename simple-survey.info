@@ -49,8 +49,9 @@
             <file type="query_file" path="www/admin/one-respondent.xql"/>
             <file type="content_page" path="www/admin/one.tcl"/>
             <file type="query_file" path="www/admin/one.xql"/>
+            <file type="query_file" db_type="oracle" path="www/admin/question-active-toggle-oracle.xql"/>
+            <file type="query_file" db_type="postgresql" path="www/admin/question-active-toggle-postgresql.xql"/>
             <file type="content_page" path="www/admin/question-active-toggle.tcl"/>
-            <file type="query_file" path="www/admin/question-active-toggle.xql"/>
             <file type="content_page" path="www/admin/question-add-2.tcl"/>
             <file type="query_file" path="www/admin/question-add-2.xql"/>
             <file type="query_file" db_type="oracle" path="www/admin/question-add-3-oracle.xql"/>
@@ -69,18 +70,21 @@
             <file type="query_file" path="www/admin/question-modify-text-2.xql"/>
             <file type="content_page" path="www/admin/question-modify-text.tcl"/>
             <file type="query_file" path="www/admin/question-modify-text.xql"/>
+            <file type="query_file" db_type="oracle" path="www/admin/question-required-toggle-oracle.xql"/>
+            <file type="query_file" db_type="postgresql" path="www/admin/question-required-toggle-postgresql.xql"/>
             <file type="content_page" path="www/admin/question-required-toggle.tcl"/>
-            <file type="query_file" path="www/admin/question-required-toggle.xql"/>
             <file type="content_page" path="www/admin/question-swap.tcl"/>
             <file type="query_file" path="www/admin/question-swap.xql"/>
             <file type="content_page" path="www/admin/respondents.tcl"/>
             <file type="query_file" path="www/admin/respondents.xql"/>
             <file type="content_page" path="www/admin/response-drill-down.tcl"/>
             <file type="query_file" path="www/admin/response-drill-down.xql"/>
+            <file type="query_file" db_type="oracle" path="www/admin/response-editable-toggle-oracle.xql"/>
+            <file type="query_file" db_type="postgresql" path="www/admin/response-editable-toggle-postgresql.xql"/>
             <file type="content_page" path="www/admin/response-editable-toggle.tcl"/>
-            <file type="query_file" path="www/admin/response-editable-toggle.xql"/>
+            <file type="query_file" db_type="oracle" path="www/admin/response-limit-toggle-oracle.xql"/>
+            <file type="query_file" db_type="postgresql" path="www/admin/response-limit-toggle-postgresql.xql"/>
             <file type="content_page" path="www/admin/response-limit-toggle.tcl"/>
-            <file type="query_file" path="www/admin/response-limit-toggle.xql"/>
             <file type="query_file" db_type="oracle" path="www/admin/responses-oracle.xql"/>
             <file type="query_file" db_type="postgresql" path="www/admin/responses-postgresql.xql"/>
             <file type="content_page" path="www/admin/responses.tcl"/>
