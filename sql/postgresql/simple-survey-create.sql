@@ -128,7 +128,7 @@ begin
     ''User Blob Responses'',
     ''relationship'',
     ''survsimp_question_responses'',
-    ''user_id'',
+    ''response_id'',
     ''user_blob_response_rel'',
     ''user'',
     ''user'',

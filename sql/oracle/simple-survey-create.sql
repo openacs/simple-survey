@@ -85,7 +85,7 @@ begin
 		object_type_one => 'user',
 		role_one => 'user',
 		table_name => 'survsimp_question_responses',
-		id_column => 'user_id',
+		id_column => 'response_id',
 		package_name => 'user_blob_response_rel',
 		min_n_rels_one => 1,
 		max_n_rels_one => 1,
