@@ -1,44 +1,28 @@
 ad_page_contract {
-
     List respondents to this survey.
 
-    @param    survey_id  which survey we're displaying respondents to
+    @param survey_id which survey we're displaying respondents to
 
-    @author   jsc@arsdigita.com
-    @author   nstrug@arsdigita.com
-    @date     February 11, 2000
-    @cvs-id   $Id$
-} {
-
+    @author jsc@arsdigita.com
+    @author nstrug@arsdigita.com
+    @creation-date February 11, 2000
+    @version $Id$
+} -query {
     survey_id:integer
-
+} -properties {
+    survey_name:onevalue
+    respondents:multirow
 }
 
 ad_require_permission $survey_id survsimp_admin_survey
 
+db_multirow respondents select_respondents {}
+set survey_name [db_string select_survey_name {}]
 
-
-set respondents ""
-
-db_foreach survsimp_survey_respondents "select first_names || ' ' || last_name as name, creation_user as user_id, email
-from persons, parties, survsimp_responses, acs_objects
-where person_id = creation_user
-and person_id = party_id
-and object_id = response_id
-and survey_id = :survey_id
-group by creation_user, email, first_names, last_name
-order by last_name" {
-
-    append respondents "<li><a href=\"one-respondent?[export_url_vars user_id  survey_id]\">$name ($email)</a>\n"
-}
-
-set survey_name [db_string survsimp_name_from_id "select name as survey_name
-from survsimp_surveys
-where survey_id = :survey_id" ]
-
-set context_bar [list [list "./" "Simple Survey Admin"] \
-     [list "one?survey_id=$survey_id" "Administer Survey"] \
-     "Respondents"]
-
+set context_bar [list \
+                    {"./" "Simple Survey Admin"} \
+                    [list "one?survey_id=$survey_id" "Administer Survey"] \
+                    "Respondents" \
+]
 
 ad_return_template
