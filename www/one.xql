@@ -12,7 +12,7 @@
  
 <fullquery name="survey_info">      
       <querytext>
-      select name, description, single_response_p, single_editable_p
+      select name, description, single_response_p, single_editable_p, display_type
     from survsimp_surveys where survey_id = :survey_id
       </querytext>
 </fullquery>
