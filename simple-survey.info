@@ -7,7 +7,7 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
 
-    <version name="0.1d" url="http://software.arsdigita.com/packages/simple-survey-0.1d.apm">
+    <version name="0.2d" url="http://software.arsdigita.com/packages/simple-survey-0.2d.apm">
     <database-support>
         <database>oracle</database>
         <database>postgresql</database>
@@ -18,7 +18,7 @@
         <vendor url="http://www.arsdigita.com/">ArsDigita Corporation</vendor>
         <description format="text/html">Simple survey is a survey builder. Surveys can contain questions with different types of answer several types: multiple choice (radio buttons), multiple answer (checkboxes) or free text entry. Multiple choice questions may also be scored on one or more variables.</description>
 
-        <requires url="acs-kernel" version="4.6.2"/>
+        <requires url="acs-kernel" version="5.0d13"/>
 
         <files>
             <file type="package_spec" path="simple-survey.info"/>
