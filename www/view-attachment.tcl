@@ -32,6 +32,8 @@ ReturnHeaders $file_type
 #  moment we're still using tcl variable substitution because we
 #  are certain that these are integers
 
+# DRB: should be rewritten to use the content repository ...
+
 db_write_blob return_attachment {select attachment_answer  
     from survsimp_question_responses
     where response_id = $response_id and question_id = $question_id
