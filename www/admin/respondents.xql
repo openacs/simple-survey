@@ -1,27 +1,33 @@
 <?xml version="1.0"?>
 <queryset>
 
-<fullquery name="survsimp_survey_respondents">      
-      <querytext>
-      select first_names || ' ' || last_name as name, creation_user as user_id, email
-from persons, parties, survsimp_responses, acs_objects
-where person_id = creation_user
-and person_id = party_id
-and object_id = response_id
-and survey_id = :survey_id
-group by creation_user, email, first_names, last_name
-order by last_name
-      </querytext>
-</fullquery>
+    <fullquery name="select_respondents">      
+        <querytext>
+            select persons.first_names || ' ' || persons.last_name as name,
+                   acs_objects.creation_user as user_id,
+                   parties.email
+            from survsimp_responses,
+                 persons,
+                 parties,
+                 acs_objects
+            where survsimp_responses.survey_id = :survey_id
+            and survsimp_responses.response_id = acs_objects.object_id
+            and acs_objects.creation_user = persons.person_id
+            and persons.person_id = parties.party_id
+            group by acs_objects.creation_user,
+                     parties.email,
+                     persons.first_names,
+                     persons.last_name
+            order by persons.last_name
+        </querytext>
+    </fullquery>
 
- 
-<fullquery name="survsimp_name_from_id">      
-      <querytext>
-      select name as survey_name
-from survsimp_surveys
-where survey_id = :survey_id
-      </querytext>
-</fullquery>
-
+    <fullquery name="select_survey_name">      
+        <querytext>
+            select name
+            from survsimp_surveys
+            where survey_id = :survey_id
+        </querytext>
+    </fullquery>
  
 </queryset>
