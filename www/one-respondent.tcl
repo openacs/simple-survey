@@ -57,14 +57,10 @@ if { ![empty_string_p $group_id] } {
 
 ### incr rownum added to support postgresql
 set rownum 1
-db_foreach response_ids_select {
-    select response_id, creation_date, to_char(creation_date, 'DD MONTH YYYY') as pretty_submission_date
-    from survsimp_responses, acs_objects
-    where survey_id = :survey_id
-    and response_id = object_id
-    and creation_user = :user_id
-    order by creation_date desc
-} {
+db_foreach response_ids_select {} {
+    set submission_date_ansi [lc_time_system_to_conn $submission_date_ansi]
+    set pretty_submission_date [lc_time_fmt $submission_date_ansi "%x %X"]
+
     set array_val responses:$rownum
     set [set array_val](submission_date) $creation_date
     set [set array_val](pretty_submission_date) $pretty_submission_date
