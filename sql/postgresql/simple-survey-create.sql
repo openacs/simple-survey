@@ -180,7 +180,7 @@ create table survsimp_surveys (
 				-- constraint survsimp_surv_single_edit_p_ck
 				-- check(single_editable_p in ('t','f')),
 	type                    varchar(20),               
-        display_type            varchar(20),
+        display_type            varchar(20)
 );
 
 -- each question can be 
