@@ -22,6 +22,7 @@ set disabled_header_written_p 0
 
 db_multirow surveys select_surveys "select survey_id, name, enabled_p
 from survsimp_surveys
+where package_id= :package_id
 order by enabled_p desc, upper(name)"
 
 ad_return_template

@@ -16,6 +16,8 @@ ad_page_contract {
 
 ad_require_permission $survey_id survsimp_admin_survey
 
+set package_id [ad_conn package_id]
+
 # Get the survey information.
 db_1row survsimp_properties "select name as survey_name, 
 short_name, description as survey_description, 
@@ -26,7 +28,8 @@ decode(single_editable_p, 't', 'Editable', 'f', 'Non-editable') as survey_editab
 from survsimp_surveys, acs_objects, persons
 where object_id = survey_id
 and person_id = creation_user
-and survey_id = :survey_id"
+and survey_id = :survey_id
+and package_id= :package_id"
 
 if {$survey_response_limit == "One"} {
     set response_limit_toggle "allow Multiple"

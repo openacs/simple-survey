@@ -13,6 +13,7 @@ from survsimp_surveys, acs_objects, persons
 where object_id = survey_id
 and person_id = creation_user
 and survey_id = :survey_id
+and package_id= :package_id
       </querytext>
 </fullquery>
 
