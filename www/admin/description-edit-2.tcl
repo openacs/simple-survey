@@ -10,7 +10,7 @@ ad_page_contract {
 
     @author jsc@arsdigita.com
     @author nstrug@arsdigita.com
-    @date   February 16, 2000
+    @creation-date   February 16, 2000
     @cvs-id $Id$
 } {
     survey_id:integer

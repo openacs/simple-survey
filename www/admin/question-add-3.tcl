@@ -16,8 +16,9 @@ ad_page_contract {
     @param required_p              flag telling us whether an answer to this question is mandatory
     @param active_p                flag telling us whether this question will show up at all
 
-    @author Jin Choi (jsc@arsdigita.com) February 9, 2000
+    @author Jin Choi (jsc@arsdigita.com) 
     @author nstrug@arsdigita.com
+    @creation-date February 9, 2000
     @cvs-id $Id$
 } {
     survey_id:integer,notnull

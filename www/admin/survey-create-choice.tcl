@@ -4,7 +4,7 @@ ad_page_contract {
     Ask the user what kind of survey they wish to create.
 
     @author nstrug@arsdigita.com
-    @date September 13, 2000
+    @creation-date September 13, 2000
     @cvs-id $Id$
 
 } {

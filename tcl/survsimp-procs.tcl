@@ -8,8 +8,8 @@ ad_library {
   @author philg@mit.edu on
   @author teadams@mit.edu
   @author nstrug@arsdigita.com
-  @date   February 9, 2000
-  @cvs-id survey-simple-defs.tcl,v 1.29.2.5 2000/07/19 20:11:24 seb Exp
+  @creation-date   February 9, 2000
+  @cvs-id $Id$
 
 }
 

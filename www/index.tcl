@@ -5,7 +5,7 @@ ad_page_contract {
 
     @author  philg@mit.edu
     @author  nstrug@arsdigita.com
-    @date    28th September 2000
+    @creation-date    28th September 2000
     @cvs-id  $Id$
 } {
 

@@ -14,7 +14,7 @@ ad_page_contract {
 
     @author Jin Choi (jsc@arsdigita.com)
     @author nstrug@arsdigita.com
-    @date   February 9, 2000
+    @creation-date   February 9, 2000
     @cvs-id $Id$
 } {
 

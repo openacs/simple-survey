@@ -7,7 +7,7 @@ ad_page_contract {
 
     @author  jsc@arsdigita.com
     @author  nstrug@arsdigita.com
-    @date    February 11, 2000
+    @creation-date    February 11, 2000
     @cvs-id  $Id$
 } {
 

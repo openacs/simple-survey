@@ -7,8 +7,9 @@ ad_page_contract {
     @param survey_id     survey providing this question
     @param question_text new text of question
 
-    @author cmceniry@arsdigita.com, Jun 16, 2000
-    @cvs-id question-modify-text-2.tcl,v 1.1.2.7 2000/07/21 04:04:15 ron Exp
+    @author cmceniry@arsdigita.com
+    @creation-date Jun 16, 2000
+    @cvs-id $Id$
 } {
 
     question_id:integer

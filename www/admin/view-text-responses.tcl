@@ -6,8 +6,8 @@ ad_page_contract {
   @param  question_id  which question we want to list answers to
  
   @author jsc@arsdigita.com
-  @date   February 11, 2000
-  @cvs-id view-text-responses.tcl,v 1.5.2.3 2000/07/21 04:04:25 ron Exp
+  @creation-date   February 11, 2000
+  @cvs-id $Id$
 
 } {
 

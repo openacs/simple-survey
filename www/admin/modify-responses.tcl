@@ -6,7 +6,7 @@ ad_page_contract {
     @param survey_id     survey providing this question
 
     @author Nick Strugnell (nstrug@arsdigita.com)
-    @date   September 15, 2000
+    @creation-date   September 15, 2000
     @cvs-id $Id$
 } {
 

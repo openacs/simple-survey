@@ -7,8 +7,8 @@ ad_page_contract {
     @param  question_id  question we're about to delete
 
     @author jsc@arsdigita.com
-    @date   March 13, 2000
-    @cvs-id question-delete.tcl,v 1.5.2.4 2000/07/21 04:04:15 ron Exp
+    @creation-date   March 13, 2000
+    @cvs-id $Id$
 } {
 
     question_id:integer

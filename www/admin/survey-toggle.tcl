@@ -7,7 +7,7 @@ ad_page_contract {
 
     @author raj@alum.mit.edu
     @author nstrug@arsdigita.com
-    @date   February 9, 2000
+    @creation-date   February 9, 2000
     @cvs-id $Id$
 } {
     survey_id:integer

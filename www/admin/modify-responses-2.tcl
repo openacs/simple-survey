@@ -7,7 +7,7 @@ ad_page_contract {
     @param scores                  list of variable scores
 
     @author Nick Strugnell (nstrug@arsdigita.com)
-    @date   September 15, 2000
+    @creation-date   September 15, 2000
     @cvs-id $Id$
 } {
     survey_id:integer,notnull

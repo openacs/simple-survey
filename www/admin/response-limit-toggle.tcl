@@ -5,7 +5,7 @@ ad_page_contract {
 
     @param survey_id survey whose properties we're changing
 
-    @cvs-id response-limit-toggle.tcl,v 1.2.2.6 2000/07/21 04:04:21 ron Exp
+    @cvs-id $Id$
 
 } {
 

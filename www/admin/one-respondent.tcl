@@ -6,7 +6,7 @@ ad_page_contract {
     @param  survey_id  survey we're viewing
     @author jsc@arsdigita.com
     @author nstrug@arsdigita.com
-    @date   February 11, 2000
+    @creation-date   February 11, 2000
     @cvs-id $Id$
 } {
 

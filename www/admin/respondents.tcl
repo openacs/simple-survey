@@ -6,7 +6,7 @@ ad_page_contract {
     @author jsc@arsdigita.com
     @author nstrug@arsdigita.com
     @creation-date February 11, 2000
-    @version $Id$
+    @cvs-id $Id$
 } -query {
     survey_id:integer
 } -properties {

@@ -11,8 +11,8 @@ ad_page_contract {
   @param  checked_p    t if we arrived from confirmation page
 
   @author philg@mit.edu
-  @date   February 9, 2000
-  @cvs-id survey-create-2.tcl,v 1.6.2.4 2000/07/21 04:04:23 ron Exp
+  @creation-date   February 9, 2000
+  @cvs-id $Id$
 
 } {
 

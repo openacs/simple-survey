@@ -8,8 +8,8 @@ ad_page_contract {
     @param question_id   question we're dealing with
 
     @author  jsc@arsdigita.com
-    @date    February 9, 2000
-    @cvs-id  question-required-toggle.tcl,v 1.5.2.5 2000/07/23 16:53:34 seb Exp
+    @creation-date    February 9, 2000
+    @cvs-id $Id$
 
 } {
 

@@ -7,7 +7,7 @@ ad_page_contract {
     @param  logic       new value for logic
 
     @author Nick Strugnell (nstrug@arsdigita.com)
-    @author September 14, 2000
+    @creation-date September 14, 2000
     @cvs-id $Id$
 } {
 
