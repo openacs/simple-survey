@@ -446,6 +446,25 @@ proc_doc survsimp_get_response_date {survey_id user_id} "Returns the date of the
 
     return $date
 }
+
+ad_proc -public survsimp_display_types {
+} {
+    return {list table paragraph}
+}
+
+# added by Ben (far later than the code below, bt_mergepice, OMG)
+ad_proc -public survsimp_display_type_select {
+    {-name "display_type"}
+    {-value "list"}
+} {
+    set return_html "<SELECT name=$name>\n"
+    foreach val [survsimp_display_types] {
+        append return_html "<OPTION> $val\n"
+    }
+    append return_html "</SELECT>"
+
+    return $return_html
+}
             
 proc_doc survsimp_bt_mergepiece {htmlpiece values} {
     HTMLPIECE is a form usually; VALUES is an ns_set

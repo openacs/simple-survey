@@ -22,6 +22,7 @@ ad_page_contract {
   desc_html
   {checked_p "f"}
   type:notnull
+  {display_type "list"}
   {variable_names ""}
   {logic:allhtml ""}
 
@@ -131,6 +132,7 @@ if {$checked_p == "f"} {
                     description => :description,
                     description_html_p => :description_html_p,
                     type => :type,
+                    display_type => :display_type,
                     package_id => :package_id,
                     context_id => :package_id,
 		    creation_user => :user_id

@@ -76,7 +76,7 @@ set whole_page "[ad_header "Create New Survey"]
 
 <h2>Create a New Survey</h2>
 
-[ad_context_bar_ws_or_index [list "" "Simple Survey Admin"] "Create Survey"]
+[ad_context_bar_ws_or_index [list "./" "Simple Survey Admin"] "Create Survey"]
 
 <hr>
 
@@ -98,6 +98,8 @@ The description above is:
 <input type=radio name=desc_html value=\"html\">HTML
 <p>
 [survey_specific_html $type]
+<p>
+Display Type: [survsimp_display_type_select -name display_type -value list]
 <center>
 <input type=submit value=\"Create\">
 </center>

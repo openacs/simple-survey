@@ -31,11 +31,11 @@ proc survey_specific_html { type } {
 	    set return_html "
 Response Presentation:
 <select name=\"presentation_type\">
-<option value=\"textbox\">Text Field</option>
-<option value=\"textarea\">Text Area</option>
-<option value=\"select\">Selection</option>
-<option value=\"radio\">Radio Buttons</option>
-<option value=\"checkbox\">Checkbox</option>
+<option value=\"textbox\">One Line Answer (Text Field)</option>
+<option value=\"textarea\">Essay Answer (Text Area)</option>
+<option value=\"select\">Multiple Choice (Drop Down)</option>
+<option value=\"radio\">Multiple Choice (Radio Buttons)</option>
+<option value=\"checkbox\">Multiple Choice (Checkbox)</option>
 <option value=\"date\">Date</option>
 <!-- Removed by gwong@orchardlabs.com because this option was not supported
 in the original code.

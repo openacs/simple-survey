@@ -179,7 +179,8 @@ create table survsimp_surveys (
 	single_editable_p	boolean,  -- was char(1)
 				-- constraint survsimp_surv_single_edit_p_ck
 				-- check(single_editable_p in ('t','f')),
-	type                    varchar(20)
+	type                    varchar(20),               
+        display_type            varchar(20),
 );
 
 -- each question can be 
@@ -421,7 +422,7 @@ create index survsimp_response_index on survsimp_question_responses (response_id
 
 -- create or replace package body survsimp_survey
 -- procedure new
-create function survsimp_survey__new (integer,varchar,varchar,text,boolean,boolean,boolean,boolean,varchar,integer,integer)
+create function survsimp_survey__new (integer,varchar,varchar,text,boolean,boolean,boolean,boolean,varchar,varchar,integer,integer)
 returns integer as '
 declare
   new__survey_id		alias for $1;  -- default null
@@ -433,8 +434,9 @@ declare
   new__single_editable_p	alias for $7;  -- default t
   new__enabled_p		alias for $8;  -- default f
   new__type			alias for $9;  -- default general
-  new__creation_user		alias for $10; -- default null
-  new__context_id		alias for $11; -- default null
+  new__display_type             alias for $10;
+  new__creation_user		alias for $11; -- default null
+  new__context_id		alias for $12; -- default null
   v_survey_id			integer;
 begin
     v_survey_id := acs_object__new (
@@ -449,11 +451,11 @@ begin
     insert into survsimp_surveys
     (survey_id, name, short_name, description, 
     description_html_p, single_response_p, single_editable_p, 
-    enabled_p, type)
+    enabled_p, type, display_type)
     values
     (v_survey_id, new__name, new__short_name, new__description, 
     new__description_html_p, new__single_response_p, new__single_editable_p, 
-    new__enabled_p, new__type);
+    new__enabled_p, new__type, new__display_type);
 
     return v_survey_id;
 

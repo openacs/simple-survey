@@ -22,7 +22,7 @@ short_name, description as survey_description,
 first_names || ' ' || last_name as creator_name, creation_user, 
 creation_date, decode(enabled_p, 't', 'Enabled', 'f', 'Disabled') as survey_status, enabled_p,
 decode(single_response_p, 't', 'One', 'f', 'Multiple') as survey_response_limit,
-decode(single_editable_p, 't', 'Editable', 'f', 'Non-editable') as survey_editable_single, type
+decode(single_editable_p, 't', 'Editable', 'f', 'Non-editable') as survey_editable_single, type, display_type
 from survsimp_surveys, acs_objects, persons
 where object_id = survey_id
 and person_id = creation_user
@@ -49,6 +49,25 @@ if {$enabled_p == "t"} {
     append toggle_enabled_link "Enable"
 }
 append toggle_enabled_link "</a> \]"
+
+# Display Type (ben)
+set display_type_toggle "\[ "
+set d_count 0
+foreach one_disp_type [survsimp_display_types] {
+    if {$one_disp_type == $display_type} {
+        continue
+    }
+
+    if {$d_count > 0} {
+        append display_type_toggle " | "
+    }
+
+    incr d_count
+
+    append display_type_toggle "<a href=survey-display-type-edit?survey_id=$survey_id&display_type=$one_disp_type>$one_disp_type</a>"
+}
+
+append display_type_toggle " \]"
 
 set questions_summary "<form><ol>\n"
 set count 0

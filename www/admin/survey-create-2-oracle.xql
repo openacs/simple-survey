@@ -14,6 +14,7 @@
                     description => :description,
                     description_html_p => :description_html_p,
                     type => :type,
+                    display_type => :display_type,
                     context_id => :package_id,
                     package_id => :package_id,
 		    creation_user => :user_id

@@ -97,8 +97,6 @@ if { $type == "scored" } {
 
 } elseif { $type == "general" } {
 
-
-
 # Display presentation options for sizing text input fields and textareas.
     set presentation_options ""
 
@@ -175,7 +173,6 @@ Type of Response:
 	"upload_file" {
 	    set response_type_html "<input type=hidden name=abstract_data_type value=blob>"
 	}
-
     }
 
 set form_var_list [export_form_vars survey_id question_id question_text presentation_type after required_p active_p type]
@@ -185,7 +182,7 @@ set form_var_list [export_form_vars survey_id question_id question_text presenta
 doc_return 200 text/html "[ad_header "Add A Question (cont.)"]
 <h2>$name</h2>
 
-[ad_context_bar_ws_or_index [list "" "Simple Survey Admin"] [list "one?[export_url_vars survey_id]" "Administer Survey"] "Add A Question"]
+[ad_context_bar_ws_or_index [list "./" "Simple Survey Admin"] [list "one?[export_url_vars survey_id]" "Administer Survey"] "Add A Question"]
 
 <hr>
 

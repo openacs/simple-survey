@@ -7,6 +7,7 @@
 <li>Name: @survey_name@ <font size=-1>[ <a href="name-edit?survey_id=@survey_id@">edit</a> ]</font>
 <li>Created: <%= [util_AnsiDatetoPrettyDate $creation_date] %>
 <li>Status: @survey_status@ <font size=-1>@toggle_enabled_link@</font>
+<li>Display Type: @display_type@ <font size=-1>@display_type_toggle@</font>
 <li>Responses per user: @survey_response_limit@ <font size=-1>[ <a href="response-limit-toggle?survey_id=@survey_id@">@response_limit_toggle@</a> @response_editable_link@ ]</font>
 <li>Description: @survey_description@ <font size=-1>[ <a href="description-edit?survey_id=@survey_id@">edit</a> ]</font>
 <li>Type: @type@

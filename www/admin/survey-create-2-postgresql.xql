@@ -16,6 +16,7 @@
 		    't',
 		    'f',
                     :type,
+                    :display_type,
 		    :user_id,
                     :package_id
                 )
