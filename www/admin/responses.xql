@@ -22,7 +22,7 @@ order by sort_key
  
 <fullquery name="survsimp_boolean_summary">      
       <querytext>
-select count(*) as n_responses, (case when boolean_answer = 't' then 'True' when boolean_answer = 'f' then 'False') as boolean_answer
+select count(*) as n_responses, (case when boolean_answer = 't' then 'True' when boolean_answer = 'f' then 'False' end) as boolean_answer
 from $question_responses_table
 where question_id = :question_id
 group by boolean_answer
