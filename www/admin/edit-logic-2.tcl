@@ -25,4 +25,4 @@ where logic_id = :logic_id
 returning logic into :1" -clobs [list $logic]
 
 db_release_unused_handles
-ad_returnredirect "one.tcl?survey_id=$survey_id"
+ad_returnredirect "one?survey_id=$survey_id"

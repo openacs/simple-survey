@@ -45,12 +45,12 @@ if { $n_responses == 0 } {
 	</pre>
 	<p> Please go back using your browser.
 	"
-	return
+        ad_script_abort
     }
 
     db_release_unused_handles
     ad_returnredirect "one?survey_id=$survey_id"
-    return
+    ad_script_abort
 } else {
     
     doc_return 200 text/html "[ad_header "Confirm Question Deletion"]

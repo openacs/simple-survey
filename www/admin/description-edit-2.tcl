@@ -31,7 +31,7 @@ if { [empty_string_p $description] } {
 
 if {$exception_count > 0} {
     ad_return_complaint $exception_count $exception_text
-    return
+    ad_script_abort
 }
 
 if {$checked_p == "f"} {
@@ -52,7 +52,6 @@ if {$checked_p == "f"} {
 	}
     }
 
-    ad_return_template
 } else {
  
 
@@ -63,6 +62,7 @@ if {$checked_p == "f"} {
 
     db_release_unused_handles
     ad_returnredirect "one?[export_url_vars survey_id]"
+    ad_script_abort
 }
 
 

@@ -37,7 +37,7 @@ db_dml survsimp_question_choices_score_delete "delete from survsimp_choice_score
         </pre>
         <p> Please go back to the <a href=\"one?survey_id=$survey_id\">survey</a>.
         "
-        return
+ad_script_abort
 }
 
 db_release_unused_handles

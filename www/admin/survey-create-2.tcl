@@ -60,7 +60,7 @@ if { $type == "scored" && [empty_string_p $variable_names] } {
 
 if {$exception_count > 0} {
     ad_return_complaint $exception_count $exception_text
-    return
+    ad_script_abort
 }
 
 if {$checked_p == "f"} {
@@ -83,7 +83,7 @@ if {$checked_p == "f"} {
     }
     
     ad_return_template survey-create-confirm
-    return
+    ad_script_abort
 } else {
     
     # make sure the short_name is unique
@@ -149,5 +149,6 @@ if {$checked_p == "f"} {
     
     db_release_unused_handles
 
-    ad_returnredirect "question-add.tcl?survey_id=$survey_id"
+    ad_returnredirect "question-add?survey_id=$survey_id"
+    ad_script_abort
 }

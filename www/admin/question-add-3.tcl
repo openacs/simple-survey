@@ -81,7 +81,7 @@ if { $type == "scored" } {
 
 if { $exception_count > 0 } {
     ad_return_complaint $exception_count $exception_text
-    return
+    ad_script_abort
 }
 
 if { $type == "scored" } {
@@ -153,7 +153,7 @@ if { $type == "scored" } {
 	if { !$already_inserted_p } {
 	    db_release_unused_handles
 	    ad_return_error "Database Error" "<pre>$errmsg</pre>"
-	    return
+            ad_script_abort
 	}
     }
 
@@ -240,7 +240,7 @@ values (survsimp_choice_id_sequence.nextval, :question_id, :trimmed_response, :c
         if { !$already_inserted_p } {
             db_release_unused_handles
             ad_return_error "Database Error" "<pre>$errmsg</pre>"
-            return
+ad_script_abort
         }
     }
 }

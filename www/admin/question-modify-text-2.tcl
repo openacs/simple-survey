@@ -23,5 +23,5 @@ ad_require_permission $survey_id survsimp_modify_question
 db_dml survey_question_text_update "update survsimp_questions set question_text=:question_text where question_id=:question_id" 
 
 db_release_unused_handles
-ad_returnredirect "one.tcl?survey_id=$survey_id"
+ad_returnredirect "one?survey_id=$survey_id"
 
