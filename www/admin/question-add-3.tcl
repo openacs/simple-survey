@@ -98,13 +98,13 @@ if { $type == "scored" } {
 	    set sort_key 1
 	}
 	
-	db_exec_plsql create_question {
+	set question_id [db_exec_plsql create_question {
 	    begin
 		:1 := survsimp_question.new (
 		    question_id => :question_id,
 		    survey_id => :survey_id,
                     sort_key => :sort_key,
-                    question_text => empty_clob(),
+                    question_text => :question_text,
                     abstract_data_type => :abstract_data_type,
                     presentation_type => :presentation_type,
                     presentation_alignment => :presentation_alignment,
@@ -114,7 +114,7 @@ if { $type == "scored" } {
 		    creation_user => :user_id
 		);
 	    end;
-	}
+	}]
 
 	db_dml add_question_text {
 	    update survsimp_questions
@@ -192,7 +192,7 @@ if { $type == "scored" } {
 		    question_id => :question_id,
 		    survey_id => :survey_id,
                     sort_key => :sort_key,
-                    question_text => :question_text,
+                    question_text => empty_clob(),
                     abstract_data_type => :abstract_data_type,
                     presentation_type => :presentation_type,
                     presentation_options => :presentation_options,
@@ -203,6 +203,13 @@ if { $type == "scored" } {
 		);
 	    end;
 	}
+
+	db_dml add_question_text {
+	    update survsimp_questions
+	    set question_text = :question_text
+	    where question_id = :question_id
+	}
+
 
     # For questions where the user is selecting a canned response, insert
     # the canned responses into survsimp_question_choices by parsing the valid_responses

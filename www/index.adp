@@ -1,9 +1,5 @@
-<html>
-    <head>
-      <title>Surveys</title>
-    </head>
-    
-    <h2>Surveys</h2>
+<master src=./master>
+<property name=title>Surveys</property>
     <ul>
       
       <multiple name=surveys>
@@ -13,5 +9,5 @@
       <if @surveys:rowcount@ eq 0>
 	<li>No surveys active
       </if>
-</html>
+    </ul>
 

@@ -1,9 +1,5 @@
-<html>
-    <head>
-      <title>Response Submitted</title>
-    </head>
-    <h2>@survey_name@</h2>
+<master src=./master>
+<property name=title>Response Submitted</property>
     <blockquote>
       Response submitted. Thank you.
     </blockquote>
-</html>
