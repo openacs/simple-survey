@@ -240,7 +240,7 @@ create table survsimp_question_choices (
 	label		varchar(500) constraint survsimp_qc_label_nn
 			not null,
 	-- might be useful for averaging or whatever, generally null
-	numeric_value	number,
+	numeric_value	numeric,
 	-- lower is earlier 
 	sort_order	integer
 );
