@@ -5,9 +5,7 @@
 --
 -- $Id$
 
-drop_package survsimp_response;
-drop_package survsimp_question;
-drop_package survsimp_survey;
+@@ simple-survey-package-drop.sql
 
 drop table survsimp_logic_surveys_map cascade constraints;
 

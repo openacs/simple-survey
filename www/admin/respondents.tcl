@@ -16,11 +16,14 @@ ad_page_contract {
 
 ad_require_permission $survey_id survsimp_admin_survey
 
-db_multirow respondents select_respondents {}
+set user_list [list]
+db_multirow respondents select_respondents {} {
+    lappend user_list $user_id
+}
+
 set survey_name [db_string select_survey_name {}]
 
 set context_bar [list \
-    {"./" "Simple Survey Admin"} \
     [list "one?survey_id=$survey_id" "Administer Survey"] \
     "Respondents" \
 ]
