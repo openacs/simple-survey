@@ -6,17 +6,15 @@
       
 select
   $column_name as response,
-  person__name(o.creation_user) as respondent_name,
-  o.creation_date as submission_date,
-  o.creation_ip as ip_address
+  person__name(acs_object__get_attribute(r.response_id,'creation_user')::text::integer) as respondent_name,
+  acs_object__get_attribute(r.response_id,'creation_date') as submission_date,
+  acs_object__get_attribute(r.response_id,'creation_ip') as ip_address
 from
   survsimp_responses r,
-  survsimp_question_responses qr,
-  acs_objects o
+  survsimp_question_responses qr
 where
   qr.response_id = r.response_id
   and qr.question_id = :question_id
-  and o.object_id = qr.response_id
   order by submission_date
 
       </querytext>
