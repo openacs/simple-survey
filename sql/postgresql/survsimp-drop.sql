@@ -67,6 +67,7 @@ end;' language 'plpgsql';
 select inline_0 ();
 drop function inline_0 ();
 
-drop function logical_negation(boolean);
+-- gilbertw - logical_negation is defined in utilities-create.sql in acs-kernel
+-- drop function logical_negation(boolean);
 
 

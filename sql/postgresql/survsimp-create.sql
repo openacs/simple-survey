@@ -15,21 +15,22 @@
 
 -- this is a PL/SQL function that used to be in the standard ACS 3.x core - not in the
 -- current ACS 4.0 core however...
-create function logical_negation(boolean)
-returns boolean as '
-declare
-    true_or_false		alias for $1;
-begin
-  if true_or_false is null then
-    return null;
-  else 
-    if true_or_false = ''f'' then
-	return ''t'';
-    else
-	return ''f'';
-    end if;
-  end if;
-end;' language 'plpgsql';
+-- gilbertw - logical_negation is defined in utilities-create.sql in acs-kernel
+-- create function logical_negation(boolean)
+-- returns boolean as '
+-- declare
+--     true_or_false		alias for $1;
+-- begin
+--   if true_or_false is null then
+--     return null;
+--   else 
+--     if true_or_false = ''f'' then
+-- 	return ''t'';
+--     else
+-- 	return ''f'';
+--     end if;
+--   end if;
+-- end;' language 'plpgsql';
 
 create function inline_0 ()
 returns integer as '
