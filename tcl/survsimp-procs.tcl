@@ -340,7 +340,7 @@ order by sort_key"
 }
 
 proc_doc survsimp_survey_admin_check { user_id survey_id } { Returns 1 if user is allowed to administer a survey or is a site administrator, 0 otherwise. } {
-    if { ![ad_administrator_p $user_id] && [db_string survsimp_creator_p "
+    if { ![ad_permission_p -user_id $user_id $survey_id "admin"] && [db_string survsimp_creator_p "
     select creation_user
     from   survsimp_surveys
     where  survey_id = :survey_id" ] != $user_id } {
