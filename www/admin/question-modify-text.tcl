@@ -24,29 +24,6 @@ set question_text [db_string survsimp_question_text_from_id "select question_tex
 from survsimp_questions
 where question_id = :question_id" ]
 
+set context_bar [ad_context_bar_ws_or_index [list "./" "Simple Survey Admin"] [list "one.tcl?[export_url_vars survey_id]" "Administer Survey"] "Modify a Question's Text"]
 
-doc_return 200 text/html "[ad_header "Modify A Question's Text"]
-<h2>$survey_name</h2>
-
-[ad_context_bar_ws_or_index [list "index.tcl" "Simple Survey Admin"] [list "one.tcl?[export_url_vars survey_id]" "Administer Survey"] "Modify a Question's Text"]
-
-<hr>
-
-<form action=\"question-modify-text-2\" method=GET>
-[export_form_vars question_id survey_id]
-Question:
-<blockquote>
-<textarea name=question_text rows=5 cols=70>[ns_quotehtml $question_text]</textarea>
-</blockquote>
-
-<p>
-
-<center>
-<input type=submit value=\"Continue\">
-</center>
-
-
-</form>
-
-[ad_footer]
-"
+ad_return_template

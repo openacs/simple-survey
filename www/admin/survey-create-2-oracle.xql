@@ -10,7 +10,7 @@
 	        :1 := survsimp_survey.new (
                     survey_id => :survey_id,
                     name => :name,
-                    short_name => :short_name,
+                    short_name => :name,
                     description => :description,
                     description_html_p => :description_html_p,
                     type => :type,

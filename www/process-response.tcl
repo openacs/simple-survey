@@ -331,7 +331,7 @@ switch $type {
 	    ad_returnredirect "$return_url"
 	    return
 	} else {
-#	    set context_bar [list [list "index.tcl" "Surveys"] "One Survey"]	    
+            set context_bar [ad_context_bar_ws_or_index [list "./" "Surveys"] "Response Submitted for $survey_name"]
 	    ad_return_template
 	}
     }
@@ -369,7 +369,8 @@ switch $type {
 	    ad_returnredirect "$return_url"
 	    return
 	} else {
-#	    set context_bar [list [list "index.tcl" "Surveys"] "One Survey"]	    
+            set context_bar [ad_context_bar_ws_or_index [list "./" "Surveys"] "Response Submitted for $survey_name"]
+
 	    ad_return_template
 	}	
     }

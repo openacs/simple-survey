@@ -1,5 +1,6 @@
 <master src=./master>
 <property name=title>Surveys</property>
+<property name=context_bar>@context_bar@</property>
     <ul>
       
       <multiple name=surveys>

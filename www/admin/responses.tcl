@@ -159,24 +159,8 @@ if { $n_responses == 1 } {
     }
 }
 
-
-doc_return 200 text/html "[ad_header "Responses to Survey"]
-<h2>$survey_name</h2>
-
-[ad_context_bar_ws_or_index [list "" "Simple Survey Admin"] \
+set context_bar [ad_context_bar_ws_or_index [list "./" "Simple Survey Admin"] \
      [list "one?survey_id=$survey_id" "Administer Survey"] \
      "Responses"]
 
-<hr>
-$unique_users_toggle
-[survey_specific_html $type]
-<p>
-$response_sentence
-
-<ul>
-$results
-</ul>
-
-[ad_footer]
-"
-
+ad_return_template

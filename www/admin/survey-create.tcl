@@ -53,7 +53,7 @@ proc survey_specific_html { type } {
 	    upvar variable_names local_variable_names
 	    set return_html "
 
-Survey variable names (comma-seperated list):
+Survey variable names (comma-separated list):
 <br>
 <input type=text name=variable_names value=\"$local_variable_names\" size=65>
 <p>
@@ -88,8 +88,6 @@ set whole_page "[ad_header "Create New Survey"]
 
 Survey Name:  <input type=text name=name value=\"$name\" size=30>
 <p>
-Short Name:  <input type=text name=short_name value = \"$short_name\" size=20 Maxlength=20>
-<p> 
 Survey Description: 
 <br>
 <textarea name=description rows=10 cols=65>$description</textarea>

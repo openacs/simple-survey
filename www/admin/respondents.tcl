@@ -36,21 +36,9 @@ set survey_name [db_string survsimp_name_from_id "select name as survey_name
 from survsimp_surveys
 where survey_id = :survey_id" ]
 
-
-
-doc_return 200 text/html "[ad_header "Respondents to Survey"]
-<h2>$survey_name</h2>
-
-[ad_context_bar_ws_or_index [list "" "Simple Survey Admin"] \
+set context_bar [ad_context_bar_ws_or_index [list "./" "Simple Survey Admin"] \
      [list "one?survey_id=$survey_id" "Administer Survey"] \
      "Respondents"]
 
-<hr>
 
-<ul>
-$respondents
-</ul>
-
-[ad_footer]
-"
-
+ad_return_template

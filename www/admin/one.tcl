@@ -41,18 +41,14 @@ if {$survey_response_limit == "One"} {
 }
 
 # allow site-wide admins to enable/disable surveys directly from here
-if { 1 == 1 } {
-    set target "one?[export_url_vars survey_id]"
-    set toggle_enabled_link "\[ <a href=\"survey-toggle?[export_url_vars survey_id enabled_p target]\">"
-    if {$enabled_p == "t"} {
-	append toggle_enabled_link "Disable"
-    } else {
-	append toggle_enabled_link "Enable"
-    }
-    append toggle_enabled_link "</a> \]"
+set target "one?[export_url_vars survey_id]"
+set toggle_enabled_link "\[ <a href=\"survey-toggle?[export_url_vars survey_id enabled_p target]\">"
+if {$enabled_p == "t"} {
+    append toggle_enabled_link "Disable"
 } else {
-    set toggle_enabled_link "(can only be changed by a site-wide admin)"
+    append toggle_enabled_link "Enable"
 }
+append toggle_enabled_link "</a> \]"
 
 set questions_summary "<form><ol>\n"
 set count 0
@@ -140,29 +136,6 @@ proc survey_specific_html { type } {
 }
 
 
-doc_return 200 text/html "[ad_header "Administer Survey"]
-<h2>$survey_name</h2>
+set context_bar [ad_context_bar_ws_or_index [list "./" "Simple Survey Admin"] "Administer Survey"]
 
-[ad_context_bar_ws_or_index [list "" "Simple Survey Admin"] "Administer Survey"]
-
-<hr>
-
-<ul>
-<li>Created by: <a href=\"/shared/community-member?user_id=$creation_user\">$creator_name</a>
-<li>Short name: $short_name
-<li>Created: [util_AnsiDatetoPrettyDate $creation_date]
-<li>Status: $survey_status <font size=-1>$toggle_enabled_link</font>
-<li>Responses per user: $survey_response_limit <font size=-1>\[ <a href=\"response-limit-toggle?[export_url_vars survey_id]\">$response_limit_toggle</a> $response_editable_link \]</font>
-<li>Description: $survey_description <font size=-1>\[ <a href=\"description-edit?[export_url_vars survey_id]\">edit</a> \]</font>
-<li>Type: $type
-<li>View responses:  <a href=\"respondents?survey_id=$survey_id\">by user</a>|<a href=\"responses?survey_id=$survey_id\">summary</a>
-[survey_specific_html $type]
-</ul>
-<p>
-
-$questions_summary
-
-[ad_footer]
-"
-
-
+ad_return_template

@@ -18,7 +18,6 @@ ad_page_contract {
 
   survey_id:integer,optional
   name
-  short_name
   description:html
   desc_html
   {checked_p "f"}
@@ -37,23 +36,6 @@ set user_id [ad_get_user_id]
 
 set exception_count 0
 set exception_text ""
-
-if { [empty_string_p $short_name] } {
-    incr exception_count
-    append exception_text "<li>You didn't enter a short name for this survey.\n"
-} else {
-    # make sure the short name isn't used somewhere else
-
-    set short_name_used_p [db_string short_name_uniqueness_check "
-select count(short_name)
-from survsimp_surveys
-where lower(short_name) = lower(:short_name)"]
-
-    if {$short_name_used_p > 0} {
-	incr exception_count
-	append exception_text "<li>This short name, $short_name, is already in use.\n"
-    }
-}
 
 if { [empty_string_p $name] } {
     incr exception_count
@@ -110,7 +92,7 @@ if {$checked_p == "f"} {
     }
     
     append whole_page "<form method=post action=\"[ns_conn url]\">
-    [export_form_vars survey_id name short_name description desc_html type variable_names logic]
+    [export_form_vars survey_id name description desc_html type variable_names logic]
     <input type=hidden name=checked_p value=\"t\">
     <br><center><input type=submit value=\"Confirm\"></center>
     </form>
@@ -145,7 +127,7 @@ if {$checked_p == "f"} {
 	        :1 := survsimp_survey.new (
                     survey_id => :survey_id,
                     name => :name,
-                    short_name => :short_name,
+                    short_name => :name,
                     description => :description,
                     description_html_p => :description_html_p,
                     type => :type,

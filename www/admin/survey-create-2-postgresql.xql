@@ -9,7 +9,7 @@
 	        select survsimp_survey__new (
                     :survey_id,
                     :name,
-                    :short_name,
+                    :name,
                     :description,
                     :description_html_p,
 		    'f',

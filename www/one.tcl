@@ -40,7 +40,7 @@ set user_id [ad_maybe_redirect_for_registration]
 db_1row survey_info "select name, description, single_response_p, single_editable_p
     from survsimp_surveys where survey_id = :survey_id"
 
-#set context_bar [list [list "index" "Surveys"] $name]
+set context_bar [ad_context_bar_ws_or_index [list "./" "Surveys"] "$name"]
 
 set num_responses [db_string responses_count {
     select count(response_id)
@@ -77,6 +77,8 @@ if {$single_response_p == "t" && $single_editable_p == "f"} {
 
 # build a list containing the HTML (generated with survsimp_question_display) for each question
 set rownum 0
+
+set questions [list]
 
 db_foreach question_ids_select {
     select question_id
