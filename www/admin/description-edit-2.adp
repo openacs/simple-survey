@@ -1,4 +1,4 @@
-<master src=./master>
+<master>
 <property name=title>Edit Description Confirmation</property>
 <property name="context">@context@</property>
 

@@ -1,4 +1,4 @@
-<master src=./master>
+<master>
 <property name=title>@survey_name@: Modify Question Text</property>
 <property name="context">@context@</property>
 

@@ -1,4 +1,4 @@
-<master src=./master>
+<master>
 <property name=title>One Survey: @survey_name@</property>
 <property name="context">@context@</property>
 

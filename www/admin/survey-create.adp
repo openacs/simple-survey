@@ -1,4 +1,4 @@
-<master src=./master>
+<master>
 <property name=title>Survey Administration: Create New Survey</property>
 <property name="context">@context@</property>
 
