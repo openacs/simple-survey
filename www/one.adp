@@ -6,7 +6,7 @@
     <h2>@name@</h2>
 
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <form method="post" action="process-response">
+      <form enctype=multipart/form-data method="post" action="process-response">
         <tr>
           <td class="mainheading">@name@</td>
         </tr>

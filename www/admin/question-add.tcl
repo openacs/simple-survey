@@ -37,7 +37,10 @@ Response Presentation:
 <option value=\"radio\">Radio Buttons</option>
 <option value=\"checkbox\">Checkbox</option>
 <option value=\"date\">Date</option>
+<!-- Removed by gwong@orchardlabs.com because this option was not supported
+in the original code.
 <option value=\"upload_file\">File Attachment</option>
+-->
 </select>
 <p>"
 	}

@@ -23,9 +23,8 @@ survsimp_survey_admin_check $user_id $survey_id
 db_transaction {
     db_dml survsimp_question_responses_delete "delete from survsimp_question_responses where question_id = :question_id" 
 
-db_dml survsimp_question_choices_delete "delete from (select * from survsimp_choice_scores, survsimp_question_choices
-      where survsimp_choice_scores.choice_id = survsimp_question_choices.choice_id and
-question_id = :question_id)"
+db_dml survsimp_question_choices_score_delete "delete from survsimp_choice_scores where choice_id in (select choice_id from survsimp_question_choices
+          where question_id = :question_id)"
 
     db_dml survsimp_question_choices_delete "delete from survsimp_question_choices where question_id = :question_id" 
 

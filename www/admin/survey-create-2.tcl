@@ -176,6 +176,8 @@ if {$checked_p == "f"} {
 
 	    set logic_id [db_string next_logic_id "select survsimp_logic_id_sequence.nextval from dual"]
 	
+	    ### added to support postgresql
+	    ### oracle query also edited
 	    db_dml add_logic "insert into survsimp_logic
               (logic_id, logic)
               values

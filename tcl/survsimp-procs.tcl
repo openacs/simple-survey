@@ -447,4 +447,309 @@ proc_doc survsimp_get_response_date {survey_id user_id} "Returns the date of the
     return $date
 }
             
+proc_doc survsimp_bt_mergepiece {htmlpiece values} {
+    HTMLPIECE is a form usually; VALUES is an ns_set
+
+    NEW VERSION DONE BY BEN ADIDA (ben@mit.edu)
+    Last modification (ben@mit.edu) on Jan ?? 1998
+    added support for dates in the date_entry_widget.
+   
+    modification (ben@mit.edu) on Jan 12th, 1998
+    when the val of an option tag is "", things screwed up
+    FIXED.
+    
+    This used to count the number of vars already introduced
+    in the form (see remaining num_vars statements), so as 
+    to end early. However, for some unknown reason, this cut off a number 
+    of forms. So now, this processes every tag in the HTML form.
+} {
+
+    set newhtml ""
+    
+    set html_piece_ben $htmlpiece
+
+    set num_vars 0
+
+    for {set i 0} {$i<[ns_set size $values]} {incr i} {
+	if {[ns_set key $values $i] != ""} {
+	    set database_values([ns_set key $values $i]) [philg_quote_double_quotes [ns_set value $values $i]]
+	    incr num_vars
+	} 
+    }
+
+    set vv {[Vv][Aa][Ll][Uu][Ee]}     ; # Sorta obvious
+    set nn {[Nn][Aa][Mm][Ee]}         ; # This is too
+    set qq {"([^"]*)"}                ; # Matches what's in quotes
+    set pp {([^ ]*)}                  ; # Matches a word (mind yer pp and qq)
+
+    set slist {}
+    
+    set count 0
+
+    while {1} {
+
+	incr count
+	set start_point [string first < $html_piece_ben]
+	if {$start_point==-1} {
+	    append newhtml $html_piece_ben
+	    break;
+	}
+	if {$start_point>0} {
+	    append newhtml [string range $html_piece_ben 0 [expr $start_point - 1]]
+	}
+	set end_point [string first > $html_piece_ben]
+	if {$end_point==-1} break
+	incr start_point
+	incr end_point -1
+	set tag [string range $html_piece_ben $start_point $end_point]
+	incr end_point 2
+	set html_piece_ben [string range $html_piece_ben $end_point end]
+	set CAPTAG [string toupper $tag]
+
+	set first_white [string first " " $CAPTAG]
+	set first_word [string range $CAPTAG 0 [expr $first_white - 1]]
+	
+	switch -regexp $CAPTAG {
+	    
+	    {^INPUT} {
+		if {[regexp {TYPE[ ]*=[ ]*("IMAGE"|"SUBMIT"|"RESET"|IMAGE|SUBMIT|RESET)} $CAPTAG]} {
+		    
+		    ###
+		    #   Ignore these
+		    ###
+		    
+		    append newhtml <$tag>
+		    
+		} elseif {[regexp {TYPE[ ]*=[ ]*("CHECKBOX"|CHECKBOX)} $CAPTAG]} {
+		    # philg and jesse added optional whitespace 8/9/97
+		    ## If it's a CHECKBOX, we cycle through
+		    #  all the possible ns_set pair to see if it should
+		    ## end up CHECKED or not.
+		    
+		    if {[regexp "$nn=$qq" $tag m nam]} {}\
+			    elseif {[regexp "$nn=$pp" $tag m nam]} {}\
+			    else {set nam ""}
+		    
+		    if {[regexp "$vv=$qq" $tag m val]} {}\
+			    elseif {[regexp "$vv=$pp" $tag m val]} {}\
+			    else {set val ""}
+		    
+		    regsub -all {[Cc][Hh][Ee][Cc][Kk][Ee][Dd]} $tag {} tag
+		    
+		    # support for multiple check boxes provided by michael cleverly
+		    if {[info exists database_values($nam)]} {
+			if {[ns_set unique $values $nam]} {
+			    if {$database_values($nam) == $val} {
+				append tag " checked"
+				incr num_vars -1
+			    }
+			} else {
+			    for {set i [ns_set find $values $nam]} {$i < [ns_set size $values]} {incr i} {
+				if {[ns_set key $values $i] == $nam && [philg_quote_double_quotes [ns_set value $values $i]] == $val} {
+				    append tag " checked"
+				    incr num_vars -1
+				    break
+				}
+			    }
+			}
+		    }
+
+		    append newhtml <$tag>
+		    
+		} elseif {[regexp {TYPE[ ]*=[ ]*("RADIO"|RADIO)} $CAPTAG]} {
+		    
+		    ## If it's a RADIO, we remove all the other
+		    #  choices beyond the first to keep from having
+		    ## more than one CHECKED
+		    
+		    if {[regexp "$nn=$qq" $tag m nam]} {}\
+			    elseif {[regexp "$nn=$pp" $tag m nam]} {}\
+			    else {set nam ""}
+		    
+		    if {[regexp "$vv=$qq" $tag m val]} {}\
+			    elseif {[regexp "$vv=$pp" $tag m val]} {}\
+			    else {set val ""}
+		    
+		    #Modified by Ben Adida (ben@mit.edu) so that
+		    # the checked tags are eliminated only if something
+		    # is in the database. 
+		    
+		    if {[info exists database_values($nam)]} {
+			regsub -all {[Cc][Hh][Ee][Cc][Kk][Ee][Dd]} $tag {} tag
+			if {$database_values($nam)==$val} {
+			    append tag " checked"
+			    incr num_vars -1
+			}
+		    }
+		    
+		    append newhtml <$tag>
+		    
+		} else {
+		    
+		    ## If it's an INPUT TYPE that hasn't been covered
+		    #  (text, password, hidden, other (defaults to text))
+		    ## then we add/replace the VALUE tag
+		    
+		    if {[regexp "$nn=$qq" $tag m nam]} {}\
+			    elseif {[regexp "$nn=$pp" $tag m nam]} {}\
+			    else {set nam ""}
+
+		    set nam [ns_urldecode $nam]
+
+		    if {[info exists database_values($nam)]} {
+			regsub -all "$vv=$qq" $tag {} tag
+			regsub -all "$vv=$pp" $tag {} tag
+			append tag " value=\"$database_values($nam)\""
+			incr num_vars -1
+		    } else {
+			if {[regexp {ColValue.([^.]*).([^ ]*)} $tag all nam type]} {
+			    set nam [ns_urldecode $nam]
+			    set typ ""
+			    if {[string match $type "day"]} {
+				set typ "day"
+			    }
+			    if {[string match $type "year"]} {
+				set typ "year"
+			    }
+			    if {$typ != ""} {
+				if {[info exists database_values($nam)]} {
+				    regsub -all "$vv=$qq" $tag {} tag
+				    regsub -all "$vv=$pp" $tag {} tag
+				    append tag " value=\"[ns_parsesqldate $typ $database_values($nam)]\""
+				}
+			    }
+			    #append tag "><nam=$nam type=$type typ=$typ" 
+			}
+		    }
+		    append newhtml <$tag>
+		}
+	    }
+	    
+	    {^TEXTAREA} {
+		
+		###
+		#   Fill in the middle of this tag
+		###
+		
+		if {[regexp "$nn=$qq" $tag m nam]} {}\
+			elseif {[regexp "$nn=$pp" $tag m nam]} {}\
+			else {set nam ""}
+		
+		if {[info exists database_values($nam)]} {
+		    while {![regexp {^<( *)/[Tt][Ee][Xx][Tt][Aa][Rr][Ee][Aa]} $html_piece_ben]} {
+			regexp {^.[^<]*(.*)} $html_piece_ben m html_piece_ben
+		    }
+		    append newhtml <$tag>$database_values($nam)
+		    incr num_vars -1
+		} else {
+		    append newhtml <$tag>
+		}
+	    }
+	    
+	    {^SELECT} {
+		
+		###
+		#   Set the snam flag, and perhaps smul, too
+		###
+		
+		set smul [regexp "MULTIPLE" $CAPTAG]
+		
+		set sflg 1
+		
+		set select_date 0
+		
+		if {[regexp "$nn=$qq" $tag m snam]} {}\
+			elseif {[regexp "$nn=$pp" $tag m snam]} {}\
+			else {set snam ""}
+
+		set snam [ns_urldecode $snam]
+
+		# In case it's a date
+		if {[regexp {ColValue.([^.]*).month} $snam all real_snam]} {
+		    if {[info exists database_values($real_snam)]} {
+			set snam $real_snam
+			set select_date 1
+		    }
+		}
+		
+		lappend slist $snam
+		
+		append newhtml <$tag>
+	    }
+	    
+	    {^OPTION} {
+		
+		###
+		#   Find the value for this
+		###
+		
+		if {$snam != ""} {
+		    
+		    if {[lsearch -exact $slist $snam] != -1} {regsub -all {[Ss][Ee][Ll][Ee][Cc][Tt][Ee][Dd]} $tag {} tag}
+		    
+		    if {[regexp "$vv *= *$qq" $tag m opt]} {}\
+			    elseif {[regexp "$vv *= *$pp" $tag m opt]} {}\
+			    else {
+			if {[info exists opt]} {
+			    unset opt
+		    }   }
+		    # at this point we've figured out what the default from the form was
+		    # and put it in $opt (if the default was spec'd inside the OPTION tag
+		    # just in case it wasn't, we're going to look for it in the 
+		    # human-readable part
+		    regexp {^([^<]*)(.*)} $html_piece_ben m txt html_piece_ben
+		    if {![info exists opt]} {
+			set val [string trim $txt]
+		    } else {
+			set val $opt
+		    }
+		    
+		    if {[info exists database_values($snam)]} {
+			# If we're dealing with a date
+			if {$select_date == 1} {
+			    set db_val [ns_parsesqldate month $database_values($snam)]
+			} else {
+			    set db_val $database_values($snam)
+			}
+
+			if {
+			    ($smul || $sflg) &&
+			    [string match $db_val $val]
+			} then {
+			    append tag " selected"
+			    incr num_vars -1
+			    set sflg 0
+			}
+		    }
+		}
+		append newhtml <$tag>$txt
+	    }
+	    
+	    {^/SELECT} {
+		    
+		###
+		#   Do we need to add to the end?
+		###
+		
+		set txt ""
+		
+		if {$snam != ""} {
+		    if {[info exists database_values($snam)] && $sflg} {
+			append txt "<option selected>$database_values($snam)"
+			incr num_vars -1
+			if {!$smul} {set snam ""}
+		    }
+		}
+		
+		append newhtml $txt<$tag>
+	    }
+	    
+	    {default} {
+		append newhtml <$tag>
+	    }
+	}
+	
+    }
+    return $newhtml
+}
             

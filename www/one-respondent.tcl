@@ -55,8 +55,10 @@ if { ![empty_string_p $group_id] } {
 # db_multirow doesn't have a side-effect block, so we have to build up the multirow by hand
 # the template::multirow seems broken...
 
+### incr rownum added to support postgresql
+set rownum 1
 db_foreach response_ids_select {
-    select rownum, response_id, creation_date, to_char(creation_date, 'DD MONTH YYYY') as pretty_submission_date
+    select response_id, creation_date, to_char(creation_date, 'DD MONTH YYYY') as pretty_submission_date
     from survsimp_responses, acs_objects
     where survey_id = :survey_id
     and response_id = object_id
@@ -68,6 +70,7 @@ db_foreach response_ids_select {
     set [set array_val](pretty_submission_date) $pretty_submission_date
     set [set array_val](answer_summary) [survsimp_answer_summary_display $response_id 1] 
     set [set array_val](rownum) $rownum
+    incr rownum
 }
 set responses:rowcount [expr { $rownum - 1 }]
 db_release_unused_handles

@@ -98,7 +98,7 @@ ad_page_contract {
 	    }
 	    
 	    if { $abstract_data_type == "blob" } {
-		set tmp_filename $response_to_question($question_id.tmpfile)
+                set tmp_filename $response_to_question($question_id.tmpfile)
 		set n_bytes [file size $tmp_filename]
 		if { $n_bytes == 0 && $required_p == "t" } {
 		    
@@ -130,6 +130,7 @@ set user_id [ad_verify_and_get_user_id]
 # Do the inserts.
 
 set response_id [db_nextval acs_object_id_seq]
+set creation_ip [ad_conn peeraddr]
 
 db_transaction {
 
@@ -241,9 +242,67 @@ values (:response_id, :question_id, empty_clob())
                         error "This should have been checked earlier."
                     } else {
 
-                        db_dml survsimp_question_response_blob_insert "insert into survsimp_question_responses (response_id, question_id, attachment_answer, attachment_file_name, attachment_file_type, attachment_file_extension)
- values (:response_id, :question_id, empty_blob(), :response_value, :guessed_file_type, :file_extension) returning attachment_answer into :1" -blob_files [list $tmp_filename] 
-                       
+			### add content repository support
+			# 1. create new content item
+			# 2. create relation between user and content item
+			# 3. create a new empty content revision and make live
+			# 4. update the cr_revisions table with the blob data
+			# 5. update the survey table
+			db_transaction {
+			    set name "blob-response-$response_id"
+
+			    set item_id [db_exec_plsql create_item "
+				begin
+				:1 := content_item.new (
+				    name => :name,
+				    creation_ip => :creation_ip);
+				end;"]
+
+			    set rel_id [db_exec_plsql create_rel "
+				begin
+				:1 := acs_rel.new (
+				    rel_type => 'user_blob_response_rel',
+				    object_id_one => :user_id,
+				    object_id_two => :item_id);
+				end;"]
+
+			    set revision_id [db_exec_plsql create_revision "
+				begin
+				:1 := content_revision.new (
+				    title => 'A Blob Response',
+				    item_id => :item_id,
+				    text => 'not_important',
+				    mime_type => :guessed_file_type,
+				    creation_date => sysdate,
+				    creation_user => :user_id,
+				    creation_ip => :creation_ip);
+
+				update cr_items
+				set live_revision = :1
+				where item_id = :item_id;
+				
+				end;"]
+
+			    db_dml update_response "
+				update cr_revisions
+				set content = empty_blob()
+				where revision_id = :revision_id
+				returning content into :1" -blob_files [list $tmp_filename]
+
+			    set content_length [cr_file_size $tmp_filename]
+
+			    db_dml survsimp_question_response_blob_insert "
+				insert into survsimp_question_responses 
+				(response_id, question_id, item_id, 
+				content_length,
+				attachment_file_name, attachment_file_type, 
+				attachment_file_extension)
+				values 
+				(:response_id, :question_id, :item_id, 
+				:content_length,
+				:response_value, :guessed_file_type, 
+				:file_extension)"
+			}
 		    }
                 }
             }

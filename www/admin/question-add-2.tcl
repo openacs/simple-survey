@@ -46,6 +46,11 @@ if { $type != "general" && $type != "scored" } {
     append exception_text "<li>Surveys of type $type are not currently available\n"
 }
 
+if { $presentation_type == "upload_file" } {
+    incr exception_count
+    append exception_text "<li>The presentation type: upload file is not supported at this time."
+}
+
 if { $exception_count > 0 } {
     ad_return_complaint $exception_count $exception_text
     return

@@ -38,7 +38,7 @@ Edit and submit to change the description for this survey:
 <br>
 The description above is:
 <input type=radio name=desc_html value=\"pre\">Preformatted text
-[bt_mergepiece  "<input type=radio name=desc_html value=\"f\">Plain text
+[survsimp_bt_mergepiece  "<input type=radio name=desc_html value=\"f\">Plain text
 <input type=radio name=desc_html value=\"t\">" $html_p_set] HTML
 <P>
 

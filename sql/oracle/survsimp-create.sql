@@ -76,6 +76,23 @@ begin
 		table_name => 'SURVSIMP_RESPONSES',
 		id_column => 'RESPONSE_ID'
 	);
+
+	acs_rel_type.create_type (
+		rel_type => 'user_blob_response_rel',
+		pretty_name => 'User Blob Response',
+		pretty_plural => 'User Blob Responses',
+		object_type_one => 'user',
+		role_one => 'user',
+		table_name => 'survsimp_question_responses',
+		id_column => 'user_id',
+		package_name => 'user_blob_response_rel',
+		min_n_rels_one => 1,
+		max_n_rels_one => 1,
+		object_type_two => 'content_item',
+		min_n_rels_two => 0,
+		max_n_rels_two => 1
+	);
+
 end;
 /
 show errors
@@ -130,7 +147,7 @@ create table survsimp_questions (
 				not null,
         abstract_data_type      varchar(30)
 				constraint survsimp_q_abs_data_type_ck
-				check (abstract_data_type in ('text', 'shorttext', 'boolean', 'number', 'integer', 'choice')),
+				check (abstract_data_type in ('text', 'shorttext', 'boolean', 'number', 'integer', 'choice', 'date')),
 	required_p		char(1)
 				constraint survsimp_q_required_p_ck
 				check (required_p in ('t','f')),
@@ -156,14 +173,20 @@ create table survsimp_questions (
 create sequence survsimp_choice_id_sequence start with 1;
 
 create table survsimp_question_choices (
-	choice_id	integer not null primary key,
-	question_id	not null references survsimp_questions,
-	-- human readable 
-	label		varchar(500) not null,
-	-- might be useful for averaging or whatever, generally null
-	numeric_value	number,
-	-- lower is earlier 
-	sort_order	integer
+        choice_id       integer constraint survsimp_qc_choice_id_nn
+                        not null
+                        constraint survsimp_qc_choice_id_pk
+                        primary key,
+        question_id     constraint survsimp_qc_question_id_nn
+                        not null
+                        constraint survsimp_qc_question_id_fk
+                        references survsimp_questions,
+        -- human readable
+        label           varchar(500) constraint survsimp_qc_label_nn                                    not null,
+        -- might be useful for averaging or whatever, generally null
+        numeric_value   number,
+        -- lower is earlier
+        sort_order      integer
 );
 
 -- this records a response by one user to one survey

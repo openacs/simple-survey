@@ -98,7 +98,7 @@ if { $type == "scored" } {
 	    set sort_key 1
 	}
 	
-	db_exec_plsql create_question {
+	db_exec_plsql reate_question {
 	    begin
 		:1 := survsimp_question.new (
 		    question_id => :question_id,
@@ -125,27 +125,29 @@ if { $type == "scored" } {
 	set count 0
 	foreach response $responses {
 	    set trimmed_response [string trim $response]
-	    db_1row get_choice_id "select survsimp_choice_id_sequence.nextval as choice_id from dual"
-	    db_dml insert_survsimp_question_choice "insert into survsimp_question_choices
-                                                (choice_id, question_id, label, sort_order)
-                                                values
-                                                (:choice_id, :question_id, :trimmed_response, :count)"
+	    set choice_id [db_string get_choice_id "select survsimp_choice_id_sequence.nextval as choice_id from dual"]
+	    db_dml insert_survsimp_question_choice "
+		insert into survsimp_question_choices
+                (choice_id, question_id, label, sort_order)
+                values
+                (:choice_id, :question_id, :trimmed_response, :count)"
 
 	    for {set i 0} {$i < $n_variables} {incr i} {
 		set score_list $scores($i)
 		set score [lindex $score_list $count]
 		set variable_id [lindex $variable_id_list $i]
-		db_dml insert_survsimp_scores "insert into survsimp_choice_scores
-                                           (choice_id, variable_id, score)
-                                           values
-                                           (:choice_id, :variable_id, :score)"
+		db_dml insert_survsimp_scores "
+		    insert into survsimp_choice_scores
+                    (choice_id, variable_id, score)
+                    values
+                    (:choice_id, :variable_id, :score)"
 	    }
 	    incr count
 	}
 
     } on_error {
 
-	set already_inserted_p [ db_string already_inserted_p "select decode(count(*),0,0,1) from survsimp_questions where question_id = :question_id" ]
+	set already_inserted_p [db_string already_inserted_p "select decode(count(*),0,0,1) from survsimp_questions where question_id = :question_id"]
 
 	if { !$already_inserted_p } {
 	    db_release_unused_handles
@@ -172,14 +174,14 @@ if { $type == "scored" } {
 	}
     }
     
-    db_transactiom {
+    db_transaction {
 	if { [exists_and_not_null after] } {
 	    # We're inserting between existing questions; move everybody down.
 	    set sort_key [expr { $after + 1 }]
 	    db_dml renumber_sort_keys "update survsimp_questions
-set sort_key = sort_key + 1
-where survey_id = :survey_id
-and sort_key > :after"
+		set sort_key = sort_key + 1
+		where survey_id = :survey_id
+		and sort_key > :after"
 	} else {
 	    set sort_key 1
 	}
@@ -189,7 +191,7 @@ and sort_key > :after"
 		:1 := survsimp_question.new (
 		    question_id => :question_id,
 		    survey_id => :survey_id,
-                    sort_key => : sort_key,
+                    sort_key => :sort_key,
                     question_text => :question_text,
                     abstract_data_type => :abstract_data_type,
                     presentation_type => :presentation_type,
@@ -215,6 +217,8 @@ and sort_key > :after"
 		        # skip empty lines
 		            continue
 		        }
+		        ### added this next line to 
+	    	        set choice_id [db_string get_choice_id "select survsimp_choice_id_sequence.nextval as choice_id from dual"]
 		        db_dml insert_survsimp_question_choice "insert into survsimp_question_choices (choice_id, question_id, label, sort_order)
 values (survsimp_choice_id_sequence.nextval, :question_id, :trimmed_response, :count)"
 		        incr count
@@ -223,7 +227,7 @@ values (survsimp_choice_id_sequence.nextval, :question_id, :trimmed_response, :c
             }
     } on_error {
 
-        set already_inserted_p [db_string already_inserted_p "select  decode(count(*),0,0,1) from  survsimp_questions where question_id = :question_id" ]
+        set already_inserted_p [db_string already_inserted_p "select decode(count(*),0,0,1) from survsimp_questions where question_id = :question_id" ]
 
         if { !$already_inserted_p } {
             db_release_unused_handles

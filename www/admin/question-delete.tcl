@@ -17,7 +17,7 @@ ad_page_contract {
 
 ad_require_permission $question_id survsimp_delete_question
 
-set survey_id [db_string survsimp_id_from_qeustion_id "select survey_id from survsimp_questions where question_id = :question_id" ]
+set survey_id [db_string survsimp_id_from_question_id "select survey_id from survsimp_questions where question_id = :question_id" ]
 
 set n_responses [db_string survsimp_number_responses "select count(*)
 from survsimp_question_responses
@@ -26,14 +26,13 @@ where question_id = :question_id" ]
 if { $n_responses == 0 } {
     db_transaction {
 
-	db_dml survsimp_delete_question_choices "delete from (select * from survsimp_choice_scores, survsimp_question_choices
-          where survsimp_choice_scores.choice_id = survsimp_question_choices.choice_id
-          and question_id = :question_id)" 
+	db_dml survsimp_question_choices_score_delete "delete from survsimp_choice_scores where choice_id in (select choice_id from survsimp_question_choices
+          where question_id = :question_id)" 
 
 	db_dml survsimp_question_choices_delete "delete from survsimp_question_choices where
          question_id = :question_id"
 
-	db_dml survsimp_delete_question {
+	db_exec_plsql survsimp_delete_question {
 	    begin
         	survsimp_question.delete (:question_id);
 	    end;
