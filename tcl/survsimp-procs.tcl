@@ -13,7 +13,7 @@ ad_library {
 
 }
 
-proc_doc survsimp_question_display { question_id {edit_previous_response_p "f"} } "Returns a string of HTML to display for a question, suitable for embedding in a form. The form variable is of the form \"response_to_question.\$question_id" {
+ad_proc survsimp_question_display { question_id {edit_previous_response_p "f"} } "Returns a string of HTML to display for a question, suitable for embedding in a form. The form variable is of the form \"response_to_question.\$question_id" {
     set element_name "response_to_question.$question_id"
 
     db_1row survsimp_question_properties "
@@ -207,7 +207,7 @@ order by sort_order" {
     return $html
 }
 
-proc_doc util_show_plain_text { text_to_display } "allows plain text (e.g. text entered through forms) to look good on screen without using tags; preserves newlines, angle brackets, etc." {
+ad_proc util_show_plain_text { text_to_display } "allows plain text (e.g. text entered through forms) to look good on screen without using tags; preserves newlines, angle brackets, etc." {
     regsub -all "\\&" $text_to_display "\\&amp;" good_text
     regsub -all "\>" $good_text "\\&gt;" good_text
     regsub -all "\<" $good_text "\\&lt;" good_text
@@ -217,7 +217,7 @@ proc_doc util_show_plain_text { text_to_display } "allows plain text (e.g. text 
     return $good_text
 }
 
-proc_doc survsimp_answer_summary_display {response_id {html_p 1} {category_id_list ""}} "Returns a string with the questions and answers. If html_p =t, the format will be html. Otherwise, it will be text.  If a list of category_ids is provided, the questions will be limited to that set of categories." {
+ad_proc survsimp_answer_summary_display {response_id {html_p 1} {category_id_list ""}} "Returns a string with the questions and answers. If html_p =t, the format will be html. Otherwise, it will be text.  If a list of category_ids is provided, the questions will be limited to that set of categories." {
 
     set return_string ""
     set question_id_previous ""
@@ -339,7 +339,7 @@ order by sort_key"
     return "$return_string"
 }
 
-proc_doc survsimp_survey_admin_check { user_id survey_id } { Returns 1 if user is allowed to administer a survey or is a site administrator, 0 otherwise. } {
+ad_proc survsimp_survey_admin_check { user_id survey_id } { Returns 1 if user is allowed to administer a survey or is a site administrator, 0 otherwise. } {
     if { ![ad_permission_p -user_id $user_id $survey_id "admin"] && [db_string survsimp_creator_p "
     select creation_user
     from   survsimp_surveys
@@ -350,7 +350,7 @@ proc_doc survsimp_survey_admin_check { user_id survey_id } { Returns 1 if user i
 }
 
 # For site administrator new stuff page.
-proc_doc ad_survsimp_new_stuff { since_when only_from_new_users_p purpose } "Produces a report of the new surveys created for the site administrator." {
+ad_proc ad_survsimp_new_stuff { since_when only_from_new_users_p purpose } "Produces a report of the new surveys created for the site administrator." {
     if { $purpose != "site_admin" } {
 	return ""
     }
@@ -383,7 +383,7 @@ if { ![info exists ad_new_stuff_module_list] || [util_search_list_of_lists $ad_n
     lappend ad_new_stuff_module_list [list "Surveys" ad_survsimp_new_stuff]
 }
 
-proc_doc survsimp_survey_short_name_to_id  {short_name} "Returns the id of the survey
+ad_proc survsimp_survey_short_name_to_id  {short_name} "Returns the id of the survey
 given the short name" {
         
     set survey_id [db_string survsimp_id_from_shortname "select survey_id from survsimp_surveys where lower(short_name) = lower(:short_name)" -default ""]   
@@ -391,7 +391,7 @@ given the short name" {
     return $survey_id
 }
 
-proc_doc survsimp_survey_get_response_id {survey_id user_id} "Returns the id of the user's most recent response to a survey" {
+ad_proc survsimp_survey_get_response_id {survey_id user_id} "Returns the id of the user's most recent response to a survey" {
     
     set response_id [ db_string get_response_id {
         select response_id
@@ -409,7 +409,7 @@ proc_doc survsimp_survey_get_response_id {survey_id user_id} "Returns the id of 
     return $response_id
 }
 
-proc_doc survsimp_survey_get_score {survey_id user_id} "Returns the score of the user's most recent response to a survey" {
+ad_proc survsimp_survey_get_score {survey_id user_id} "Returns the score of the user's most recent response to a survey" {
     
     set response_id [ survsimp_survey_get_response_id $survey_id $user_id ]
     
@@ -430,7 +430,7 @@ proc_doc survsimp_survey_get_score {survey_id user_id} "Returns the score of the
     return $score
 }
 
-proc_doc survsimp_get_response_date {survey_id user_id} "Returns the date of the user's most recent response to a survey" {
+ad_proc survsimp_get_response_date {survey_id user_id} "Returns the date of the user's most recent response to a survey" {
     
     set response_id [ survsimp_survey_get_response_id $survey_id $user_id ]
 
@@ -466,7 +466,7 @@ ad_proc -public survsimp_display_type_select {
     return $return_html
 }
             
-proc_doc survsimp_bt_mergepiece {htmlpiece values} {
+ad_proc survsimp_bt_mergepiece {htmlpiece values} {
     HTMLPIECE is a form usually; VALUES is an ns_set
 
     NEW VERSION DONE BY BEN ADIDA (ben@mit.edu)
