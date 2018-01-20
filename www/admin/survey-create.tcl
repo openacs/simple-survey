@@ -38,6 +38,7 @@ if { $type != "general" && $type != "scored" } {
 
 if { $exception_count > 0 } {
     ad_return_complaint $exception_count $exception_text
+    ad_script_abort
 }
 
 # function to insert survey type-specific form html

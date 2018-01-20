@@ -59,7 +59,6 @@ if { $n_responses == 0 } {
 [ad_context_bar [list "one?[export_url_vars survey_id]" "Administer Survey"] "Delete Question"]
 
 <hr>
-
 Deleting this question will also delete all $n_responses responses. Really delete?
 <p>
 <a href=\"question-delete-2?[export_url_vars question_id]\">Yes</a> / 
@@ -67,4 +66,5 @@ Deleting this question will also delete all $n_responses responses. Really delet
 
 [ad_footer]
 "
+    ad_script_abort
 }

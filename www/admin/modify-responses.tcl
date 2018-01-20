@@ -83,3 +83,4 @@ $table_html
 
 [ad_footer]
 "
+ad_script_abort

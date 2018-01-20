@@ -96,4 +96,4 @@ $results
 
 [ad_footer]
 "
-
+ad_script_abort

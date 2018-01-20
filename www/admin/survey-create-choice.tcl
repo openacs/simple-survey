@@ -42,3 +42,4 @@ and free text answer questions in the same survey.</dd>
 "
 
 doc_return 200 text/html $whole_page
+ad_script_abort

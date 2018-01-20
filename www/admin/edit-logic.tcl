@@ -26,6 +26,7 @@ if { $type != "scored" } {
 
 if { $exception_count > 0 } {
     ad_return_complaint $exception_count $exception_text
+    ad_script_abort
 }
 
 # get the existing logic
@@ -57,4 +58,4 @@ Logic:
 </form>
 [ad_footer]
 "
-
+ad_script_abort
