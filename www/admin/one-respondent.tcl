@@ -23,7 +23,7 @@ where survey_id = :survey_id" ]
 
 if { !$survey_exists_p } {
     ad_return_error "Not Found" "Could not find survey #$survey_id"
-    return
+    ad_script_abort
 }
 
 # survey_name and description are now set 
@@ -32,7 +32,7 @@ set user_exists_p [db_0or1row user_name_from_id "select first_names, last_name f
 
 if { !$user_exists_p } {
     ad_return_error "Not Found" "Could not find user #$user_id"
-    return
+    ad_script_abort
 }
 
 

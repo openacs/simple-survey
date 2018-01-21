@@ -27,7 +27,7 @@ set sort_key = decode(sort_key, :sort_key, :next_sort_key, :next_sort_key, :sort
 where survey_id = :survey_id
 and sort_key in (:sort_key, :next_sort_key)"
 
-    ad_returnredirect "one?[export_url_vars survey_id]"
+    ad_returnredirect [export_vars -base one {survey_id}]
 
 } on_error {
 
@@ -38,3 +38,4 @@ $errmsg
 </pre>
 "
 }
+ad_script_abort
