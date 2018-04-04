@@ -362,7 +362,7 @@ ad_proc ad_survsimp_new_stuff { since_when only_from_new_users_p purpose } "Prod
     
     set new_survey_items ""
     
-    db_for_each survsimp_responses_new "select survey_id, name, description, u.user_id, first_names || ' ' || last_name as creator_name, creation_date
+    db_foreach survsimp_responses_new "select survey_id, name, description, u.user_id, first_names || ' ' || last_name as creator_name, creation_date
 from survsimp_surveys s, $users_table u
 where s.creation_user = u.user_id
 and creation_date> :since_when
