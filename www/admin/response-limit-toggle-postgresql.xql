@@ -2,7 +2,7 @@
 <queryset>
    <rdbms><type>postgresql</type><version>7.1</version></rdbms>
 
-<fullquery name="survsimp_reponse_toggle">      
+<fullquery name="survsimp_response_toggle">      
       <querytext>
       update survsimp_surveys 
 set single_response_p = util__logical_negation(single_response_p)

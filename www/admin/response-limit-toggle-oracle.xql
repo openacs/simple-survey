@@ -2,7 +2,7 @@
 <queryset>
    <rdbms><type>oracle</type><version>8.1.6</version></rdbms>
 
-<fullquery name="survsimp_reponse_toggle">      
+<fullquery name="survsimp_response_toggle">      
       <querytext>
       update survsimp_surveys 
 set single_response_p = util.logical_negation(single_response_p)
