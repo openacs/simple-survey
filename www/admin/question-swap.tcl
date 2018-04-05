@@ -31,7 +31,7 @@ and sort_key in (:sort_key, :next_sort_key)"
 
 } on_error {
 
-    ad_return_error "Database error" "A database error occured while trying
+    ad_return_error "Database error" "A database error occurred while trying
 to swap your questions. Here's the error:
 <pre>
 $errmsg
