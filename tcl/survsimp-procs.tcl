@@ -186,7 +186,7 @@ order by sort_order" {
 	}
 
 	"checkbox" {
-	    set choices [list]
+	    set choices {}
 	    db_foreach sursimp_question_choices_3 "select * from survsimp_question_choices
 where question_id = :question_id
 order by sort_order" {
