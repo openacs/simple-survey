@@ -166,7 +166,7 @@ order by sort_order" {
 		    set user_value $choice_id
 		}
 		
-		set choices [list]
+		set choices {}
 		db_foreach sursimp_question_choices_2 "select choice_id, label
 from survsimp_question_choices
 where question_id = :question_id
@@ -253,7 +253,7 @@ where
   and sq.active_p = 't'
 order by sort_key"
     } else {
-	set bind_var_list [list]
+	set bind_var_list {}
 	set i 0
 	foreach cat_id $category_id_list {
 	    incr i
