@@ -78,7 +78,7 @@ if {$single_response_p == "t" && $single_editable_p == "f"} {
 # build a list containing the HTML (generated with survsimp_question_display) for each question
 set rownum 0
 
-set questions {}
+set questions [list]
 
 db_foreach question_ids_select {
     select question_id
