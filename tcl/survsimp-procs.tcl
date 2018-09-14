@@ -379,7 +379,7 @@ order by creation_date desc" {
 
 ns_share ad_new_stuff_module_list
 
-if { ![info exists ad_new_stuff_module_list] || [util_search_list_of_lists $ad_new_stuff_module_list "Surveys" 0] == -1 } {
+if { ![info exists ad_new_stuff_module_list] || [lsearch -index 0 $ad_new_stuff_module_list "Surveys" 0] == -1 } {
     lappend ad_new_stuff_module_list [list "Surveys" ad_survsimp_new_stuff]
 }
 
