@@ -167,17 +167,11 @@ db_transaction {
 		    # Deal with multiple responses. 
 		    set checked_responses $response_to_question($question_id)
 		    foreach response_value $checked_responses {
-			if { [empty_string_p $response_value] } {
-			    set response_value [db_null]
-			}
 
 			db_dml survsimp_question_response_checkbox_insert "insert into survsimp_question_responses (response_id, question_id, choice_id)
  values (:response_id, :question_id, :response_value)"
 		    }
 		}  else {
-		    if { [empty_string_p $response_value] } {
-			set response_value [db_null]
-		    }
 
 		    db_dml survsimp_question_response_choice_insert "insert into survsimp_question_responses (response_id, question_id, choice_id)
  values (:response_id, :question_id, :response_value)"
@@ -188,26 +182,17 @@ db_transaction {
  values (:response_id, :question_id, :response_value)"
 	    }
 	    "boolean" {
-		if { [empty_string_p $response_value] } {
-		    set response_value [db_null]
-		}
 
 		db_dml survsimp_question_response_boolean_insert "insert into survsimp_question_responses (response_id, question_id, boolean_answer)
  values (:response_id, :question_id, :response_value)"
 	    }
 	    "number" {}
 	    "integer" {
-                if { [empty_string_p $response_value] } {
-                    set response_value [db_null]
-                } 
 
 		db_dml survsimp_question_response_integer_insert "insert into survsimp_question_responses (response_id, question_id, number_answer)
  values (:response_id, :question_id, :response_value)"
 	    }
 	    "text" {
-                if { [empty_string_p $response_value] } {
-                    set response_value [db_null]
-                }
 
 		db_dml survsimp_question_response_text_insert "
 insert into survsimp_question_responses
@@ -216,9 +201,6 @@ values (:response_id, :question_id, empty_clob())
  returning clob_answer into :1" -clobs [list $response_value]
 	    }
 	    "date" {
-                if { [empty_string_p $response_value] } {
-                    set response_value [db_null]
-                }
 
 		db_dml survsimp_question_response_date_insert "insert into survsimp_question_responses (response_id, question_id, date_answer)
  values (:response_id, :question_id, :response_value)"
